@@ -78,8 +78,7 @@ public class Date {
     }
 
     public Date add(Date t){
-        int y = 0;
-        int m= 0;
+
         int d = 0;
         int maxDay = getMonthLastDay();
         if (getDay() +t.day >= maxDay){
