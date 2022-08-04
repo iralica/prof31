@@ -1,5 +1,7 @@
 package Lesson1;
 
+import java.util.Arrays;
+
 public class RGB {
     public static void main(String[] args) {
         RGB n = new RGB(100,100,200);
@@ -30,6 +32,15 @@ public class RGB {
         return b;
     }
 
+    @Override
+    public String toString() {
+        return "RGB{" +
+                "r=" + r +
+                ", g=" + g +
+                ", b=" + b +
+                '}';
+    }
+
     public  float [] RGBtoHSV() {
         float max = Math.max(getG(), Math.max(getB(), getR()));
         float min = Math.min(getB(), Math.min(getG(), getR()));
@@ -42,7 +53,7 @@ public class RGB {
         else if (max == getG())
             h = (60 * (getB() - getR()) / (max - min)) + 120;
         else if (max == getB())
-            h = (60 * (getR() - getR()) / (max - min)) + 240;
+            h = (60 * (getR() - getG()) / (max - min)) + 240;
 
 
         float l = (max + min) / 2;
