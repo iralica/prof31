@@ -25,4 +25,12 @@ public class Staff extends Person{
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("Stuff[name=%s, address=%s, faculty=%s, salary=%f]"
+                , getName(), getAddress(), getFaculty(), getSalary());
+    }
+
 }
