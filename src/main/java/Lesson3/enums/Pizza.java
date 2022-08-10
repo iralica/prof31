@@ -1,14 +1,11 @@
 package Lesson3.enums;
 
 public class Pizza {
-
+    // private String size;
     private PizzaSize size;
-    private String pizza;
-    private int cheese;
-    private int pepperoni;
-    private int ham;
+    private int cheese, pepperoni, ham;
 
-    //public Pizza(String pizzaSize, int cheeseCount, int pepperoniCount, int hamCount)
+    //public Pizza(String size, int cheese, int pepperoni, int ham) {
     public Pizza(PizzaSize size, int cheese, int pepperoni, int ham) {
         this.size = size;
         this.cheese = cheese;
@@ -22,15 +19,6 @@ public class Pizza {
 
     public void setSize(PizzaSize size) {
         this.size = size;
-    }
-
-
-    public String getPizza() {
-        return pizza;
-    }
-
-    public void setPizza(String pizza) {
-        this.pizza = pizza;
     }
 
     public int getCheese() {
@@ -57,11 +45,7 @@ public class Pizza {
         this.ham = ham;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Вы выбрали: \n %s cheese%2d pepperoni%2d ham%2d", size, cheese, pepperoni, ham);
-         }
-    public double calcPrice()
+    public int calcPrice()
     {
         int price = 0;
         switch (size)
@@ -81,6 +65,15 @@ public class Pizza {
         }
         price += (pepperoni + cheese + ham) * 2;
         return price;
+    }
 
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "size='" + size + '\'' +
+                ", cheese=" + cheese +
+                ", pepperoni=" + pepperoni +
+                ", ham=" + ham +
+                '}';
     }
 }

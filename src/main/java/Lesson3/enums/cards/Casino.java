@@ -14,8 +14,8 @@ public class Casino {
             deck.add(card);
             System.out.println("Карта " + card);
             int score = 0;
-            for (int i = 0; i < deck.size(); i++) {
-                score += deck.get(i).getValue();
+            for (Card value : deck) {
+                score += value.getValue();
             }
             System.out.println("Ваш счет " + score);
             System.out.println("Нажмите N для прекращения игры");

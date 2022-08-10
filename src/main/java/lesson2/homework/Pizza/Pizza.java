@@ -1,24 +1,26 @@
 package lesson2.homework.Pizza;
 
+import static lesson2.homework.Pizza.PizzaSize.*;
+
 public class Pizza {
 
-    private String pizzaSize;
+    private PizzaSize pizzaSize;
     private int cheeseCount;
     private int pepperoniCount;
     private int hamCount;
 
-    public Pizza(String pizzaSize, int cheeseCount, int pepperoniCount, int hamCount) {
+    public Pizza(PizzaSize pizzaSize, int cheeseCount, int pepperoniCount, int hamCount) {
         this.pizzaSize = pizzaSize;
         this.cheeseCount = cheeseCount;
         this.pepperoniCount = pepperoniCount;
         this.hamCount = hamCount;
     }
 
-    public String getPizzaSize() {
+    public PizzaSize getPizzaSize() {
         return pizzaSize;
     }
 
-    public void setPizzaSize(String pizzaSize) {
+    public void setPizzaSize(PizzaSize pizzaSize) {
         this.pizzaSize = pizzaSize;
     }
 
@@ -45,27 +47,27 @@ public class Pizza {
     public void setHamCount(int hamCount) {
         this.hamCount = hamCount;
     }
+
     @Override
     public String toString() {
         return String.format("Вы выбрали: \n %s cheese%2d pepperoni%2d ham%2d", pizzaSize, cheeseCount, pepperoniCount, hamCount);
          }
     public double calcPrice()
     {
-        if(pizzaSize.equalsIgnoreCase("small"))
-        {
-            return  10 + (cheeseCount + pepperoniCount + hamCount) * 2;
+        int price = 0;
+        switch (pizzaSize){
+            case SMALL:
+                price += 10;
+                break ;
+            case MEDIUM:
+                price += 10;
+                break ;
+            case LARGE:
+                price += 10;
+                break ;
         }
-        else if(pizzaSize.equalsIgnoreCase("medium"))
-        {
-            return 12 + (cheeseCount + pepperoniCount + hamCount) * 2;
-        }
-        else if(pizzaSize.equalsIgnoreCase("large"))
-        {
-            return 14 + (cheeseCount + pepperoniCount + hamCount) * 2;
-        }
-        else
-        {
-            return  0.00;
+        price += (pepperoniCount + cheeseCount + hamCount) * 2;
+        return price;
         }
     }
-}
+
