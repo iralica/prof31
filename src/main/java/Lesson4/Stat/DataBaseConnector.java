@@ -27,7 +27,6 @@ class Logger {
         return instance;
     }
 }
-
 class Tester{
     public static void main(String[] args) {
 

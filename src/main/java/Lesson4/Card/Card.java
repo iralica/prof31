@@ -3,7 +3,7 @@ package Lesson4.Card;
 public class Card {
     private String holder;
     private double balance;
-
+    private CardStatus status;
 
     public enum CardStatus {
         ORDERED(5)  {
@@ -26,12 +26,6 @@ public class Card {
         };
 
 
-        private int timeToDelivery;
-
-        public int getTimeToDelivery() {
-            return timeToDelivery;
-        }
-
         public boolean isReady()
         {
             return false;
@@ -46,6 +40,12 @@ public class Card {
             return false;
         }
 
+        private int timeToDelivery;
+
+        public int getTimeToDelivery() {
+            return timeToDelivery;
+        }
+
         CardStatus(int timeToDelivery)
         {
             this.timeToDelivery = timeToDelivery;
@@ -57,4 +57,7 @@ public class Card {
         return status.isReady();
     }
 
+    public void setStatus(CardStatus status) {
+        this.status = status;
+    }
 }
