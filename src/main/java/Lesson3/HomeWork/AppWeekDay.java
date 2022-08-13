@@ -5,11 +5,10 @@ import java.util.List;
 
 public class AppWeekDay {
     public static void main(String[] args) {
-        Weekday m = Weekday.MONDAY;
+        System.out.println(Weekday.MONDAY.isWeekend());
+        System.out.println(Weekday.SATURDAY.isWeekend());
+        Weekday m = Weekday.valueOf("MONDAY");
 
-        m.isWeekDay();
-
-        System.out.println(m.isWeekend());
     }
 
 }
