@@ -3,7 +3,7 @@ package lesson2.inheritance;
 public class Person {
     private String name, address;
 
-    public Person(String name, String address) {
+    public Person(String name) {
         this.name = name;
         this.address = address;
     }

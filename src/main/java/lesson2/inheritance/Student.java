@@ -5,7 +5,7 @@ public class Student extends Person{
     private int year;
 
     public Student(String name, String address, String program, int year) {
-        super(name, address);
+        super(name);
         this.program = program;
         this.year = year;
     }

@@ -5,7 +5,7 @@ public class Staff extends Person{
     private double salary;
 
     public Staff(String name, String address, String faculty, double salary) {
-        super(name, address);
+        super(name);
         this.faculty = faculty;
         this.salary = salary;
     }
