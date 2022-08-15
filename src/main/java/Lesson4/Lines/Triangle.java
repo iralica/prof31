@@ -12,9 +12,11 @@ public class Triangle implements Figure {
 
     @Override
     public String toString() {
-        return "Triangle{" +
-                "points=" + points +
-                '}';
+        StringBuilder result = new StringBuilder("Triangle points= ");
+        for (Point p: points){
+            result.append("(").append(p.getX()).append(", ").append(p.getY()).append(")");
+        }
+        return result.toString();
     }
 
     // method overloading - перегрузка методов
@@ -24,7 +26,6 @@ public class Triangle implements Figure {
                 Math.pow(p1.getX()-p0.getX(), 2) + Math.pow(p1.getY()-p0.getY(), 2)
         );
     }
-
 
     // overriding - переопределение метода суперкласса
     @Override
@@ -46,7 +47,12 @@ public class Triangle implements Figure {
         points.add(P0);
         points.add(P1);
         points.add(P2);
-        System.out.println(points);
+
+        Triangle t1 = new Triangle(points);
+        System.out.println("Triangle length: " + t1.getLength());
+        System.out.println("----------");
+        System.out.println(t1);
+        System.out.println("----------");
 
     }
 }

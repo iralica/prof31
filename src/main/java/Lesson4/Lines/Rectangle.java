@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rectangle implements Figure{
-    private List<Point> po = new ArrayList<>();
+    private List<Point> points = new ArrayList<>();
 
     public Rectangle(List<Point> points) {
-        this.po = po;
+        this.points = points;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder result = new StringBuilder("Rectangle points= ");
+        for (Point p: points){
+            result.append("(").append(p.getX()).append(", ").append(p.getY()).append(")");
+        }
+        return result.toString();
     }
     private double getLength(Point p0, Point p1)
     {
@@ -22,14 +26,29 @@ public class Rectangle implements Figure{
     }
     @Override
     public double getLength() {
-        Point p0 = po.get(0);
-        Point p1 = po.get(1);
-        Point p2 = po.get(2);
-        Point p3 = po.get(3);
+        Point p0 = points.get(0);
+        Point p1 = points.get(1);
+        Point p2 = points.get(2);
+        Point p3 = points.get(3);
         return getLength(p0, p1 ) + getLength(p1, p2) + getLength(p2, p3) + getLength(p3, p0);
     }
 
     public static void main(String[] args) {
+        List<Point> points = new ArrayList<>();
+        Point P0 = new Point(2, 2);
+        Point P1 = new Point(6, 6);
+        Point P2 = new Point(8, 8);
+        Point P3 = new Point(4, 5);
+        points.add(P0);
+        points.add(P1);
+        points.add(P2);
+        points.add(P3);
+
+        Rectangle po = new Rectangle(points);
+        System.out.println("Rectangle length: " + po.getLength());
+        System.out.println("----------");
+        System.out.println(points);
+        System.out.println("----------");
 
     }
 }
