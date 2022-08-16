@@ -16,4 +16,10 @@ public class Point {
 
     public static void add(Point point) {
     }
+    public double getLength(Point p)
+    {
+        return Math.sqrt(
+                Math.pow(p.getX()-getX(), 2) + Math.pow(p.getY()-getY(), 2)
+        );
+    }
 }

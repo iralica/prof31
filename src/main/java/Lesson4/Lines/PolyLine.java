@@ -12,34 +12,34 @@ public class PolyLine implements Figure{
 
     public void appendPoint(Point p) {
         points.add(p);
+        //return this;
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("PolyLine points= ");
-        for (Point p : points) {
-            result.append("(").append(p.getX()).append(", ").append(p.getY()).append(")");
-        }
-        return result.toString();
+        //for () {
+         //   result.append("(").append(p.getX()).append(", ").append(p.getY()).append(")");
+       // }
+       // result.append("}");
+      return result.toString();
     }
-    private double getLength(Point p0, Point p1)
-    {
-        return Math.sqrt(
-                Math.pow(p1.getX()-p0.getX(), 2) + Math.pow(p1.getY()-p0.getY(), 2)
-        );
-    }
+    //private double getLength(Point p0, Point p1)
+   // {
+    //    return Math.sqrt(
+    //            Math.pow(p1.getX()-p0.getX(), 2) + Math.pow(p1.getY()-p0.getY(), 2)
+    //    );
+    //}
     @Override
     public double getLength() {
-        double length = 0;
-        for (int i = 0; i < points.size(); i++) {
-            if (i < points.size() - 1) {
-                length += getLength(points.get(i), points.get(i + 1));
-            } else {
-                length += getLength(points.get(i), points.get(0));
-            }
+        double l = 0;
+        for (int i = 0; i < points.size() - 1; i++) {
+            l += points.get(i).getLength(points.get(i+ 1));
         }
-        return length;
+        return l;
     }
+
+
     public static void main(String[] args) {
         List<Point> points = new ArrayList<>();
         Point P0 = new Point(2, 2);

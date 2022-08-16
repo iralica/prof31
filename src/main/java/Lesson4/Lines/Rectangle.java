@@ -24,13 +24,24 @@ public class Rectangle implements Figure{
                 Math.pow(p1.getX()-p0.getX(), 2) + Math.pow(p1.getY()-p0.getY(), 2)
         );
     }
+    //@Override
+    //public double getLength() {
+        //Point p0 = points.get(0);
+        //Point p1 = points.get(1);
+        //Point p2 = points.get(2);
+        //Point p3 = points.get(3);
+       // return getLength(p0, p1 ) + getLength(p1, p2) + getLength(p2, p3) + getLength(p3, p0);
+   // }
     @Override
     public double getLength() {
-        Point p0 = points.get(0);
-        Point p1 = points.get(1);
-        Point p2 = points.get(2);
-        Point p3 = points.get(3);
-        return getLength(p0, p1 ) + getLength(p1, p2) + getLength(p2, p3) + getLength(p3, p0);
+        double l = 0;
+        for (int i = 0; i < points.size(); i++) {
+            if(i != points.size() - 1)
+                l += points.get(i).getLength(points.get(i+1));
+            else
+                l += points.get(i).getLength(points.get(0));
+        }
+        return l;
     }
 
     public static void main(String[] args) {
