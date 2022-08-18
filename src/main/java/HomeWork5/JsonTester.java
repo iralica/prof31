@@ -8,13 +8,13 @@ public class JsonTester {
         // объект -> текст = сериализация serialization
         // текст -> объект = десериализация (парсинг)
 
-        Point p  = new Point(33,44);
+        Point p  = new Point(	-98.3293,29.5211);
         Gson gson = new Gson(); // библиотека
         String s = gson.toJson(p);
         System.out.println(s);
         // JSON = JavaScript Object Notation
 
-        String stringPoint = "{'x':10, 'y':20}";
+        String stringPoint = "{'x':-98.3293, 'y':29.5211}";
         // <point><x>10</x><y>20</y></point>
         // <point x=10 y=10/>
 
