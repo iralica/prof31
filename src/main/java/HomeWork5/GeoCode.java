@@ -1,4 +1,4 @@
-package Lesson5.json;
+package HomeWork5;
 
 public class GeoCode {
     private String country;
