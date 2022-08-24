@@ -20,7 +20,16 @@ public class CompareArraiList {
         System.out.println(b2);
         boolean b3 = l4.equals(l5);
         System.out.println(b3);
+
+        System.out.println(checkList(l1, l2));
     }
 
+    private static boolean checkList(List<Integer> l1, List<Integer> l2){
+        for (int i = 0; i < l1.size(); i++) {
+            if(!l1.get(i).equals(l2.get(i)))
+                return false;
+        }
+        return true;
+    }
 
 }
