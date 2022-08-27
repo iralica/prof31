@@ -13,7 +13,7 @@ public class CompareElementsArray {
         System.out.println(compareElements(l1, l2));
 
     }
-    public static List<String> compareElements(ArrayList<Integer> a, ArrayList<Integer> b){
+    public static List<String> compareElements(List<Integer> a, ArrayList<Integer> b){
         List<String> c = new ArrayList<>();
         for (int i = 0; i < a.size(); i++)
             if (a.get(i).equals(b.get(i))) {
@@ -21,5 +21,4 @@ public class CompareElementsArray {
             } else c.add(i, "No");
         return c;
     }
-
 }
