@@ -43,6 +43,6 @@ public class ListTester {
             System.out.println("My list: " + i);
         }
 
-        myIterator.remove();
+        //myIterator.remove();
     }
 }
