@@ -58,10 +58,6 @@ public class MyArrayList implements AdvancedArrayList {
         source = newSource;
     }
 
-    @Override
-    public void printAllElem() {
-
-    }
 
     @Override
     public void insert(int index, int value) {
@@ -86,6 +82,15 @@ public class MyArrayList implements AdvancedArrayList {
 
     }
 
+    public void print()
+    {
+        for (int i = 0; i < source.length; i++) {
+            System.out.print(source[i]+ " ");
+        }
+        System.out.println();
+        System.out.println(Arrays.toString(source));
+    }
+
     @Override
     public void remove(int index) {
         int[] newSource = new int[source.length - 1];
@@ -103,15 +108,6 @@ public class MyArrayList implements AdvancedArrayList {
 
     }
 
-    @Override
-    public boolean contains(int value) {
-        for (int i : source) {
-            if (i == value) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Override
     public Iterator<Integer> iterator() {
@@ -135,8 +131,4 @@ public class MyArrayList implements AdvancedArrayList {
             }
         };
     }
-
-    public void printArray() {
-        System.out.println(Arrays.toString(source));
     }
-}

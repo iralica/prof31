@@ -9,14 +9,14 @@ public class AppArray {
         list.append(1);
         list.append(2);
         list.append(3);
-        list.printArray();
+        list.print();
         list.remove(1);
-        list.printArray();
+        list.print();
 
         System.out.println("--------------------");
         int[] arr = new int[]{11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         list.append(arr);
-        list.printArray();
+        list.print();
 
         System.out.println("--------------------");
         Iterator<Integer> myIterator = list.iterator();
