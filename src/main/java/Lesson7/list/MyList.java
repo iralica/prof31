@@ -17,8 +17,6 @@ public interface MyList extends Iterable<Integer>{
 
     void remove(int index);
 
-    void addFirst();
-
     int size();
     // int  "простой" тип. стэковый
     // Intejer  - ссылочный тип

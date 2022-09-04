@@ -141,7 +141,18 @@ public class DoubleLinkedList implements MyList {
     }
     @Override
     public void removeFirst() {
-        remove(0);
+        if (!isEmpty()) {
+            DoubleLinkedNode temp = head;
+
+            if (head.next == null) {
+                head = null;
+                tail = null;
+            } else {
+                head = head.next;
+                head.prev = null;
+            }
+            System.out.println(temp.toString() + " is popped from the list");
+        }
     }
 
     @Override
@@ -178,20 +189,14 @@ public class DoubleLinkedList implements MyList {
 
         if(head == null) {  //если список пуст, начало и конец указывают на newNode
             head = tail = newNode;
-            //head's previous will be null
             head.prev = null;
-            //tail's next will be null
             tail.next = null;
         }
         else {
-            //add newNode to the end of list. tail->next set to newNode
-            tail.next = (DoubleLinkedNode) newNode;
-            //newNode->previous set to tail
-            newNode.prev = tail;
-            //newNode becomes new tail
-            tail = newNode;
-            //tail's next point to null
-            tail.next = null;
+            tail.next = (DoubleLinkedNode) newNode; //добавить новый Node в конец списка. tail->next установить в newNode
+            newNode.prev = tail; // предыдущий в хвост
+            tail = newNode; // становится новым tail
+            tail.next = null; // tail's next point to null
         }
     }
 
