@@ -58,7 +58,15 @@ public class MyArrayList implements AdvancedArrayList {
         source = newSource;
     }
 
-
+    @Override
+    public boolean contains(int value) {
+        for (int i : source) {
+            if (i == value) {
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public void insert(int index, int value) {
         int[] newSource = new int[source.length + 1];
