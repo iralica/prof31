@@ -4,10 +4,7 @@ import Lesson7.list.MyList;
 import org.w3c.dom.Node;
 
 import java.util.Iterator;
-//Дописать delete, iterator() и тесты
-//* дописать remove в итераторе
-//дописать методы void addFirst(int), void removeFirst(), int getFirst()
-//                     добавляющие,         удаляющие и      получающие первый элемент в списке
+
 public class DoubleLinkedList implements MyList {
     private DoubleLinkedNode head = null;
     private DoubleLinkedNode tail = null;
@@ -128,32 +125,13 @@ public class DoubleLinkedList implements MyList {
     }
     void removeLast()
     {
-
         remove(size() - 1);
     }
     int getLast()
     {
         return get(size() - 1);
     }
-    @Override
-    public int getFirst() {
-        return 0;
-    }
-    @Override
-    public void removeFirst() {
-        if (!isEmpty()) {
-            DoubleLinkedNode temp = head;
 
-            if (head.next == null) {
-                head = null;
-                tail = null;
-            } else {
-                head = head.next;
-                head.prev = null;
-            }
-            System.out.println(temp.toString() + " is popped from the list");
-        }
-    }
 
     @Override
     public int size() {
@@ -217,6 +195,26 @@ public class DoubleLinkedList implements MyList {
             this.next = next;
             if(next != null)
                 next.prev = this;
+        }
+    }
+
+    @Override
+    public int getFirst() {
+        return 0;
+    }
+    @Override
+    public void removeFirst() {
+        if (!isEmpty()) {
+            DoubleLinkedNode temp = head;
+
+            if (head.next == null) {
+                head = null;
+                tail = null;
+            } else {
+                head = head.next;
+                head.prev = null;
+            }
+            System.out.println(temp.toString());
         }
     }
 }
