@@ -5,13 +5,13 @@ package Lesson8.MyDoubleLinkedList;
 // DoubleLinkedNode (prev, next ссылки на предыдущий и следующий элементы)
 // и добавить ссылку DoubleLinkedNode tail (на конечный элемент) в класс;
 // добавить методы void addLast(int), void removeLast() и int getLast()
-// добавляющие, удаляющие и получающие последний элемент в списке.
+//                     добавляющие,        удаляющие и        получающие последний элемент в списке.
 
 
 import java.util.Iterator;
 
 public class MyDoubleLinkedList implements MyDoubleLinkedListInterface {
-    private static DoubleLinkedNode head;
+    private DoubleLinkedNode head;
     private DoubleLinkedNode tail;
 
     static class DoubleLinkedNode {
@@ -85,12 +85,28 @@ public class MyDoubleLinkedList implements MyDoubleLinkedListInterface {
 
     @Override
     public void set(int index, int value) {
-
+        DoubleLinkedNode doubleLinkedNode = head;
+        while (doubleLinkedNode != null) {
+            if (index == 0) {
+                doubleLinkedNode.setValue(value);
+                return;
+            }
+            index--;
+            doubleLinkedNode = doubleLinkedNode.getNext();
+        }
     }
 
     @Override
     public int get(int index) {
-        return 0;
+        DoubleLinkedNode node = head;
+        while (node != null) {
+            if (index == 0) {
+                return node.getData();
+            }
+            index--;
+            node = node.getNext();
+        }
+        return node.getData();
     }
 
     @Override
@@ -99,33 +115,72 @@ public class MyDoubleLinkedList implements MyDoubleLinkedListInterface {
     }
 
     @Override
-    public boolean contains(int value) {
-        return false;
+    public int contains(int index) {
+        DoubleLinkedNode node = head;
+        while (node != null) {
+            if (index == 0) {
+                return node.getData();
+            }
+            index--;
+            node = node.getNext();
+        }
+        return node.getData();
     }
 
     @Override
-    public void add(int index, int value) {
+    public void add(int index, int position) {
 
     }
 
     @Override
     public void addFirst(int value) {
-
+        if (head == null && tail == null) {
+            head = new DoubleLinkedNode(value);
+            tail = head;
+            return;
+        }
+        if (size() == 1 /*&& head.equals(tail)*/) {
+            head = new DoubleLinkedNode(value);
+            tail.setPrev(head);
+            head.setNext(tail);
+            return;
+        }
+        DoubleLinkedNode doubleLinkedNode = new DoubleLinkedNode(value);
+        head.prev = doubleLinkedNode;
+        doubleLinkedNode.setNext(head);
+        head = doubleLinkedNode;
     }
 
     @Override
     public void addLast(int value) {
-
+// проверяем, есть ли вообще объекты в листе
+        if (head == null && tail == null) {
+            head = new DoubleLinkedNode(value);
+            tail = head;
+            return;
+        }
+        // определяем условия добавления 1-ого элемента
+        if (size() == 1 /*&& head.equals(tail)*/) {
+            tail = new DoubleLinkedNode(value);
+            head.setNext(tail);
+            tail.setPrev(head);
+            return;
+        }
+        // определяем условия добавления 2-ого и последующих элементов
+        DoubleLinkedNode doubleLinkedNode = new DoubleLinkedNode(value);
+        tail.next = doubleLinkedNode;
+        doubleLinkedNode.setPrev(tail);
+        tail = doubleLinkedNode;
     }
 
     @Override
     public int getFirst() {
-        return 0;
+        return head.getData();
     }
 
     @Override
     public int getLast() {
-        return 0;
+        return tail.getData();
     }
 
     @Override
