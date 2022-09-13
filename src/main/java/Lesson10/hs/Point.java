@@ -1,5 +1,7 @@
 package Lesson10.hs;
 
+import java.util.Objects;
+
 public class Point implements Comparable<Point> {
     private int x;
     private int y;

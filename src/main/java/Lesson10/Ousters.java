@@ -1,48 +1,43 @@
 package Lesson10;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-interface Filter {  // SAM - single access method
-    boolean criteria(String string); // критерий
+interface Filter {
+boolean criteria (String string);
 }
-
-class MyFilter implements Filter {
+class MyFilter implements Filter{
 
     @Override
     public boolean criteria(String string) {
-        return string.contains("r");
+        return false;
     }
 }
 
 public class Ousters {
     public static void main(String[] args) {
-        String[] months = new String[]{"January", "February", "March", "Aril", "May",
-                "June", "July", "August", "September", "October", "November", "December"};
+        String [] months = new String[] {"January", "February", "March", "April", "May",
+                "June", "July", "August", "September", "October", "November", "December"
+        };
+        Collection<String> result = filter(
+                new MyFilter(),
+                new ArrayList<>(Arrays.asList("January", "February", "March", "April", "May",
+                        "June", "July", "August", "September", "October", "November", "December"))
+        );
 
-        Collection<String> result = filter(   // вызов функции filter
-                //new MyFilter(),             // конкретный класс
-//                new Filter() {              // анонимный внутренний класс
-//                    @Override
-//                    public boolean criteria(String string) {
-//                        return string.contains("r");
-//                    }
-//                },
-                string -> string.contains("r"),  // лямбда-выражение
-                new ArrayList<>(Arrays.asList("January", "February", "March", "Aril", "May",
-                        "June", "July", "August", "September", "October", "November", "December")));
         System.out.println(result);
-        // архитектурный шаблон Command
+
     }
 
-    public static Collection<String> filter(Filter f, Collection<String> strings) {
+    public static Collection<String> filter(Filter f, Collection<String> strings)
+    {
         List<String> ret = new ArrayList<>();
-        for (String s : strings)  // для всех строк из выходной коллекции
-            if (f.criteria(s))    // если строка соответствует критерию
-                ret.add(s);       // добавим ее в выходную коллекцию
+        for(String s: strings)
+            if(f.criteria(s))
+                ret.add(s);
         return ret;
     }
 }
+

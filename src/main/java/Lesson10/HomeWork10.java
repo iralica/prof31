@@ -44,6 +44,48 @@ public class HomeWork10 {
         return duplicates;
     }
 
+    public static class Word {
+        public String key;
+        public int count = 0;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Word word = (Word) o;
+
+            //if (count != word.count) return false; // не хочу сравнивать по количеству
+            return Objects.equals(key, word.key);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = key != null ? key.hashCode() : 0;
+            result = 31 * result + count;
+            return result;
+        }
+    }
+    public static void wordCounter(String s)
+    {
+        Set<Word> w = new HashSet<>();
+        for (String a : s.split(" "))
+        {
+            Word d = new Word(a);
+            if(w.contains(d))
+            {
+                d = findWord(w, d);
+            }
+            d.count++; // в любом случае увеличиваем количество слов на 1
+            w.add(d);
+        }
+    }
+    private static Word findWord(Set<Word> w, Word d){
+        for (Word ww : w){
+
+        }
+        return d;
+    }
     private static void wordsCounter(String string) {
         List<String> words = new ArrayList<>(Arrays.asList(string.split("\\s")));
         Set<String> newWords = new HashSet<>(words);
