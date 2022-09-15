@@ -38,8 +38,10 @@ public class ExceptionTester {
         public static int divide(int a , int b)
         {
             if(b == 0)
-               throw new MyException("Division by zero");
-            return a/b;
+               //throw new MyException("Division by zero");
+
+            return a;
+            return a;
         }
 
         public static class MyException extends Exception {

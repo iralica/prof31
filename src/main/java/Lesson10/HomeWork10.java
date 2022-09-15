@@ -48,6 +48,9 @@ public class HomeWork10 {
         public String key;
         public int count = 0;
 
+        public Word(String a) {
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
