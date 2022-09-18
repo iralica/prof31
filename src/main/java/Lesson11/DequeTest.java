@@ -10,8 +10,8 @@ public class DequeTest {
         d.addFirst(30);
         d.addFirst(20);
         d.addFirst(10);
-
-
+        System.out.println(d);
+        d.descendingIterator();
         System.out.println(d);
 
     }
