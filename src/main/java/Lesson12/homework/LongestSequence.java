@@ -13,11 +13,11 @@ public class LongestSequence {
         arr.add(7);
         arr.add(4);
         System.out.println(arr);
-        longestSequenceTester((ArrayList) arr);
+        //longestSequenceTester((ArrayList) arr);
         System.out.println(arr);
     }
 
-    public static Collection<Integer> longestSequenceTester(ArrayList a){
+   /* public static Collection<Integer> longestSequenceTester(ArrayList a){
         Set<Integer> b = new HashSet<>();
         int longSequence = 1;
         int currentSequence = 1;
@@ -33,7 +33,7 @@ public class LongestSequence {
                 }
             }
         return b;
-    }
+    }*/
 
     }
 
