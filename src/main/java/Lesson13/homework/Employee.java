@@ -1,6 +1,7 @@
 package Lesson13.homework;
 
 import java.util.Comparator;
+import java.util.List;
 
 
 public class Employee {
@@ -43,7 +44,6 @@ public class Employee {
     }
 
     public static class nameComparator implements Comparator<Employee>{
-
         @Override
         public int compare(Employee o1, Employee o2) {
             return o1.getName().compareTo(o2.getName());
@@ -57,10 +57,23 @@ public class Employee {
     }
 
     public static class salaryComparator implements Comparator<Employee>{
-
         @Override
         public int compare(Employee s1, Employee s2) {
             return Integer.compare(s1.getSalary(), s2.getSalary());
         }
+    }
+    public static class idComparator implements Comparator<Employee>{
+        @Override
+        public int compare(Employee s1, Employee s2) {
+            return Integer.compare(s1.getId(), s2.getId());
+        }
+    }
+    public static void complexSort(List<Employee> emps, List<Comparator<Employee>> comparators){
+        if (comparators.size() == 0)
+            return;
+        Comparator<Employee> c = comparators.get(0);
+        for (int i = 1; i < comparators.size(); ++i)
+            c = c.thenComparing(comparators.get(i));
+        emps.sort(c);
     }
 }
