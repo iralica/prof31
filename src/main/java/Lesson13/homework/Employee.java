@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
     private int id;
     private int age;
     private int salary;
@@ -16,23 +16,18 @@ public class Employee {
         this.salary = salary;
         this.name = name;
     }
-
     public int getId() {
         return id;
     }
-
     public int getAge() {
         return age;
     }
-
     public int getSalary() {
         return salary;
     }
-
     public String getName() {
         return name;
     }
-
     @Override
     public String toString() {
         return "Employee{" +
@@ -41,6 +36,10 @@ public class Employee {
                 ", s=" + salary +
                 ", n='" + name + '\'' +
                 '}';
+    }
+    @Override
+    public int compareTo(Employee o) {
+        return Integer.compare(id, o.getId());
     }
 
     public static class nameComparator implements Comparator<Employee>{
@@ -68,6 +67,35 @@ public class Employee {
             return Integer.compare(s1.getId(), s2.getId());
         }
     }
+    public static class EmployeeAgeComparator implements Comparator<Employee> {
+        @Override
+        public int compare(Employee o1, Employee o2) {
+            return Integer.compare(o1.getAge(), o2.getAge());
+        }
+    }
+
+    public static class EmployeeNameComparator implements Comparator<Employee> {
+        @Override
+        public int compare(Employee o1, Employee o2) {
+            if(o1 == null && o2 == null)
+                return 0;
+            if(o1== null)
+                return -1;
+            if(o2 == null)
+                return 1;
+            if(o1.getName() == null && o2.getName() == null)
+                return 0;
+            if(o1.getName() == null && o2.getName() != null)
+                return -1;
+            return o1.getName().compareTo(o2.getName());
+        }
+    }
+
+
+
+    //Напишите функцию, которая принимает на вход список Employee и
+    // список компараторов для сортировки Employee;
+    // сортирует переданный List<Employee> компараторами.
     public static void complexSort(List<Employee> emps, List<Comparator<Employee>> comparators){
         if (comparators.size() == 0)
             return;
