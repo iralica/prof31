@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class Teachers implements Comparable<Teachers> {
-    String name;
-    int salary;
-    List<Students> students = new ArrayList<>();
+    private  String name;
+    private int salary;
+    private List<Students> students = new ArrayList<>();
 
 
     public Teachers(String name, int salary) {
@@ -34,6 +34,12 @@ public class Teachers implements Comparable<Teachers> {
         this.salary = salary;
     }
 
+    public void addStudent(Students student)
+    {
+        if(student != null)
+            students.add(student);
+    }
+
     public List<Students> getStudents() {
         return students;
     }
@@ -46,6 +52,11 @@ public class Teachers implements Comparable<Teachers> {
     public int compareTo(Teachers o) {
         return students.size() - o.getStudents().size();
     }
+    @Override
+    public String toString() {
+        return getName() + " " + getStudents().size();
+    }
+
 }
 
 
