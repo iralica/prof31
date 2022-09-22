@@ -7,6 +7,8 @@ public class CompareApp {
      Students s3 = new Students("Same", "accounting", 20);
      Students s4 = new Students("Dave", "engineer", 30);
 
+     Teachers t1 = new Teachers("Andre", 20000);
+     Teachers t2 = new Teachers("Andre", 20000);
 
     }
 }

@@ -6,13 +6,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
-public class Teachers implements Comparator<Teachers> {
+public class Teachers implements Comparable<Teachers> {
     String name;
     int salary;
+    List<Students> students = new ArrayList<>();
+
 
     public Teachers(String name, int salary) {
         this.name = name;
         this.salary = salary;
+        this.students = students;
     }
 
     public String getName() {
@@ -31,21 +34,18 @@ public class Teachers implements Comparator<Teachers> {
         this.salary = salary;
     }
 
+    public List<Students> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Students> students) {
+        this.students = students;
+    }
+
     @Override
-    public int compare(Teachers o1, Teachers o2) {
-        return 0;
+    public int compareTo(Teachers o) {
+        return students.size() - o.getStudents().size();
     }
-
-
-    public static class TeacherStudentsComparator implements Comparator<Teachers> {
-
-        @Override
-        public int compare(Teachers o1, Teachers o2) {
-            TreeSet<Students> s = new TreeSet<>();
-            return Integer.compare(s. ;
-        }
-    }
-
-
-
 }
+
+
