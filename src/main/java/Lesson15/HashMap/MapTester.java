@@ -10,7 +10,9 @@ public class MapTester {
         System.out.println(map.get("Moldova"));
         System.out.println(map.contains("Moldova"));
         map.remove("Moldova");
-        System.out.println(map);
+        map.put("Hungary", "Budapest");
+        map.put("Germany", "Berlin");
+        //System.out.println();
         map.resize();
         System.out.println(map.size());
     }

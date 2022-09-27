@@ -1,6 +1,6 @@
 package Lesson15.HashMap;
 
-public class MyHashMap implements MyMap{
+public class MyGenericHashMap<K, V> implements MyMapGeneric<K,V>{
     private int size=0; // количество пар
     private static final int INITIAL_CAPACITY = 16;
     private static final double LOAD_FACTOR = 0.75; // size/source.lenght >= LOAD_FACTOR
@@ -17,7 +17,7 @@ public class MyHashMap implements MyMap{
         }
     }
     @Override
-    public void put(String key, String value) {
+    public void put(K key, V value) {
         if(size > LOAD_FACTOR*source.length)
             resize();
         Pair pair = findPair(key); // поиск пары по ключу
@@ -113,7 +113,7 @@ public class MyHashMap implements MyMap{
     }
 
     @Override
-    public boolean contains(String key) {
+    public boolean contains(K key) {
         int bucket = findBucket(key);               // найдем ведро по ключу
         Pair temp = source[bucket];// корень цепочки
         while (temp != null) {
