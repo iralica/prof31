@@ -1,30 +1,44 @@
 package Lesson15.HashMap;
 
 public class MyGenericHashMap<K, V> implements MyMapGeneric<K,V>{
-    private int size=0; // количество пар
-    private static final int INITIAL_CAPACITY = 16;
-    private static final double LOAD_FACTOR = 0.75; // size/source.lenght >= LOAD_FACTOR
-    private Pair [] source = new Pair[INITIAL_CAPACITY];
+    private int size = 0; // количество пар в контейнере
+    private static final int INITIAL_CAPACITY = 4; // начальный размер массива
+    private static final double LOAD_FACTOR = 0.75; // коэффициент загруженности
+    // если size/source.length >= LOAD_FACTOR то нужно перебалансировать
+    // для равномерного распределения элементов чтобы не было длинных цепочек
 
-    private static class Pair { // элемент
-        String key; // ключ
-        String value; // значение
-        Pair next; // ссылка на следующий элемент в цепочке
-        public Pair(String key, String value, Pair next) {
+    private Pair<K,V> [] source = new Pair[INITIAL_CAPACITY]; // массив для хранения "голов" цепочек
+
+    public int capacity()
+    {
+        return source.length;
+    }
+
+    private static class Pair<K,V> { // элемент
+        K key; // ключ
+        V value; // значение
+        Pair<K,V> next; // ссылка на следующий элемент в цепочке
+        public Pair(K key, V value, Pair<K,V> next) {
             this.key = key;
             this.value = value;
             this.next = next;
         }
+
+        @Override
+        public String toString() {
+            return "{"+key+":"+value+"}";
+        }
     }
+
     @Override
     public void put(K key, V value) {
         if(size > LOAD_FACTOR*source.length)
             resize();
-        Pair pair = findPair(key); // поиск пары по ключу
+        Pair<K,V> pair = findPair(key); // поиск пары по ключу
         if(pair == null) // нужно вставить новую пару
         {
             int bucket = findBucket(key); // найдем номер ведра по ключу
-            pair = new Pair(key, value, source[bucket]);
+            pair = new Pair<>(key, value, source[bucket]);
             source[bucket] = pair; // делаем новую пару корнем цепочки
             size++;
         }
@@ -33,17 +47,17 @@ public class MyGenericHashMap<K, V> implements MyMapGeneric<K,V>{
         }
     }
 
-    private int findBucket(String key)
+    private int findBucket(K key)
     { // по ключу находим хэш и по хэшу находим бакет
         return Math.abs(key.hashCode()) % source.length;
     }
 
     // поиск пары по ключу
-    private Pair findPair(String key)
+    private Pair<K,V> findPair(K key)
     {
         // найдем ведро по ключу
         int bucket = findBucket(key);
-        Pair currentPair = source[bucket]; // корень цепочки
+        Pair<K,V> currentPair = source[bucket]; // корень цепочки
         while (currentPair != null)
         {
             if(currentPair.key.equals(key))
@@ -52,25 +66,21 @@ public class MyGenericHashMap<K, V> implements MyMapGeneric<K,V>{
         }
         return null; // пара с ключом key не найдена
     }
+
     // перебалансировка массива - создание массива в два раза больше и перенос
     // туда всех элементов
-    public void resize() {
+    private void resize()
+    {
         // нужно создать новый массив длины в два раза больше чем source
         // пробежаться по всем корневым элементам и перенести их
         // в нужные бакеты нового массива
-        //int newCapacity = INITIAL_CAPACITY*2;
-        //Pair [] resizedPair = new Pair [newCapacity];
-        //for (int i = 0; i < INITIAL_CAPACITY; i++) {
-         //   resizedPair[i] = this.source[i];
-        //}
-        //this.source = resizedPair;
-        Pair [] newSource = new Pair[source.length * 2]; // новый массив
-        for(Pair p : source) // корень текущего
+        Pair<K,V> [] newSource = new Pair[source.length * 2]; // новый массив
+        for(Pair<K,V> p : source) // корень текущего
         {
-            Pair c = p;
+            Pair<K,V> c = p;
             while (c != null) // текущая пара
             {
-                Pair n  = c.next;
+                Pair<K,V> n  = c.next;
                 int bucket = Math.abs(c.key.hashCode()) % newSource.length;
                 c.next = newSource[bucket];
                 newSource[bucket] = c;
@@ -81,57 +91,12 @@ public class MyGenericHashMap<K, V> implements MyMapGeneric<K,V>{
     }
 
     @Override
-    public String get(String key) {
-        // найти значение в паре с ключом key
-        Pair pair = findPair(key);
-        if(pair == null)
-            return null;
-        return pair.value;
-    }
-
-    @Override
-    public String remove(String key) {
-        int bucket = findBucket(key);
-        Pair currentPair = source[bucket]; // корень цепочки
-        if(currentPair == null) return null;
-        Pair prev = currentPair;
-        while (currentPair != null) { // не нулевая пара
-            if (currentPair.key != null && currentPair.key.equals(key)) {
-                String valueReturn = currentPair.value;
-                if (prev == currentPair) { //first element?
-                    source[bucket] = currentPair.next;
-                } else {
-                    prev.next = currentPair.next;
-                }
-                size--;
-                return valueReturn;
-            }
-            prev = currentPair;
-            currentPair = currentPair.next;
-        }
-        return null;
-    }
-
-    @Override
-    public boolean contains(K key) {
-        int bucket = findBucket(key);               // найдем ведро по ключу
-        Pair temp = source[bucket];// корень цепочки
-        while (temp != null) {
-            if ((temp.key == null && key == null)
-                    || (temp.key.equals(key))) {
-                return true;
-            }
-            temp = temp.next; //
-        }
-        return false;
-    }
-    @Override
     public String toString() {
-        int s = size;
+        int s = size-1;
         StringBuilder b = new StringBuilder("[");
-        for(Pair p : source)
+        for(Pair<K,V> p : source)
         {
-            Pair c = p;
+            Pair<K,V> c = p;
             while (c != null)
             {
                 b.append(c);
@@ -147,10 +112,48 @@ public class MyGenericHashMap<K, V> implements MyMapGeneric<K,V>{
     }
 
     @Override
-    public int size () {
-        return size;
+    public V get(K key) { // найти значение в паре с ключом key
+        Pair<K,V> pair = findPair(key);
+        if(pair == null)
+            return null;
+        return pair.value;
     }
 
+    @Override
+    public V remove(K key) {
+        int bucket = findBucket(key);
+        Pair<K,V> c = source[bucket];
+        if(c == null)
+            return null;
+        if(c.key.equals(key))
+        {
+            source[bucket]  = c.next;
+            size--;
+            return c.value;
+        }
+        while (c.next != null)
+        {
+            if(c.next.key.equals(key))
+            {
+                Pair<K,V> toDelete = c.next;
+                c.next = toDelete.next;
+                size--;
+                return toDelete.value;
+            }
+            c = c.next;
+        }
+        return null;
+    }
 
+    @Override
+    public boolean contains(K key) {
+        // найти пару с ключом key
+        // Pair p = findPair(key);
+        return findPair(key) != null;
+    }
 
+    @Override
+    public int size() {
+        return size;
+    }
 }
