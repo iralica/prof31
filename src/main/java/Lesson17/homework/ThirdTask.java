@@ -7,17 +7,18 @@ import java.util.List;
 
 public class ThirdTask {
     public static void main(String[] args) {
-        int [] arr = new int[] {5, 7, 12, 2};
+        int [] arr = new int[] {1, 7, 12, 10};
         System.out.println(test(arr, 10));
     }
-    // цикл for
-    //
     public static boolean test(int [] a, int b){
         if (a.length < 1) {
             return false;
         }
-        for (int i = 0; i < a.length -1; i++) {
-            if
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a.length ; j++)
+                if (a[i] * a[j] == b) {
+                    return true;
+                }
         }
         return false;
     }
