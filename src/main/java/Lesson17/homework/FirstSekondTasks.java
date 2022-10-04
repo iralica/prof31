@@ -4,6 +4,8 @@ package Lesson17.homework;
 // * напишите метод для декодирования такой строки
 
 
+import java.util.Collections;
+
 public class FirstSekondTasks {
     public static void main(String[] args) {
         String str = "aaaabbcccdaaa";
@@ -38,10 +40,14 @@ public class FirstSekondTasks {
             return "Строка пустая";
         }
         StringBuilder decoded = new StringBuilder();
-        for (int i = 0; i < s.length(); i+=2) { // прыгаем через один
+        for (int i = 0; i < s.length(); i+=2) {                                 // прыгаем через один
+            decoded.append(String.join                                           // concatenates the given elements with the delimiter
+                    ("", Collections.nCopies                            //return an immutable list which contains n copies of given object
+                            (Character.getNumericValue(s.charAt(i)),            // returns the int value of the specified character
+                                    String.valueOf(s.charAt(i + 1)))));        //valueOf (char c) — возвращает строковое представление аргумента char.
 
         }
-        return s;
+        return decoded.toString();
     }
 
 }

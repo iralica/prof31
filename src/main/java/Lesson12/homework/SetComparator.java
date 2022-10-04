@@ -16,21 +16,21 @@ public class SetComparator {
         System.out.println(checkSets(s1, s2));
         System.out.println(checkSets(s1, s3));
     }
-   public static boolean checkSets(Set<String> s1, Set<String> s2) {
-       if (s1 == s2) // не один ли объект
-           return true;
-       if (s1 == null || s2 == null) // не равны ли нулю
-           return false;
-       if (s1.size() != s2.size()) // если разные размеры соответсвено не равны
-           return false;
-       for (String string : s1) {
-           if (!s2.contains(string))
-               return false;
-       }
-       return true;
+    public static boolean checkSets(Set<String> s1, Set<String> s2) {
+        if (s1 == s2) // не один ли объект
+            return true;
+        if (s1 == null || s2 == null) // не равны ли нулю
+            return false;
+        if (s1.size() != s2.size()) // если разные размеры соответсвено не равны
+            return false;
+        for (String string : s1) {
+            if (!s2.contains(string))
+                return false;
+        }
+        return true;
 // 160295
 //        Set<String> s3 = new HashSet<>(s1);
 //        s3.removeAll(s2);
 //        return s3.size() == 0;
-   }
+    }
 }
