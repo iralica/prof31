@@ -35,19 +35,68 @@ public class FirstSekondTasks {
         return encoded.toString();
     }
 
+    public static String encodeTwo(String input){
+        StringBuilder b = new StringBuilder();
+
+        char[] letters = input.toCharArray();
+        int counter = 0;
+        char prev = letters[0];
+        char curr = letters[0];
+        for (char c: letters)
+        {
+            curr = c;
+            if(curr != prev) {
+                b.append(counter).append(prev);
+                counter = 1;
+            }
+            else {
+                counter++;
+            }
+            prev = curr;
+        }
+        b.append(counter).append(curr);
+        return b.toString();
+    }
+
+
     public static String decode(String s){
         if (s.length() == 0) {
             return "Строка пустая";
         }
         StringBuilder decoded = new StringBuilder();
-        for (int i = 0; i < s.length(); i+=2) {                                 // прыгаем через один
-            decoded.append(String.join                                           // concatenates the given elements with the delimiter
-                    ("", Collections.nCopies                            //return an immutable list which contains n copies of given object
-                            (Character.getNumericValue(s.charAt(i)),            // returns the int value of the specified character
-                                    String.valueOf(s.charAt(i + 1)))));        //valueOf (char c) — возвращает строковое представление аргумента char.
-
+        for (int i = 0; i < s.length(); i+=2) {                            // прыгаем через один
+            decoded.append(String.join                                     // concatenates the given elements with the delimiter
+                    ("", Collections.nCopies                       //return an immutable list which contains n copies of given object
+                            (Character.getNumericValue(s.charAt(i)),       // returns the int value of the specified character
+                                    String.valueOf(s.charAt(i + 1)))));    //valueOf (char c) — возвращает строковое представление аргумента char.
         }
         return decoded.toString();
     }
+    public static String decodeTwo(String crypto){
+        // разбиваем на символы
+        // в цикле если символ цифра, добавляем его в строку с цифрами
+        // если символ буква, преобразовываем строку с цифрами в int
+        // в цикле добавляем в builder нужное количество букв
+        StringBuilder r = new StringBuilder(); // результат
+        String d = "";
+        char[] letters = crypto.toCharArray();
+        for (char c : letters)
+        {
+            if(!Character.isDigit(c))
+            {
+                int numberOfLetters = Integer.parseInt(d);
+                // r.append(String.valueOf(c).repeat(Math.max(0, numberOfLetters)));
+                for(int j = 0; j < numberOfLetters; j++)
+                    r.append(c);
+                d = "";
+            }
+            else
+            {
+                d += c;
+            }
+        }
+        return r.toString();
 
+
+    }
 }
