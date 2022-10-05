@@ -12,26 +12,29 @@ public class CrazyLambdas {
      * @return a string supplier
      */
     public static Supplier<String> helloSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return () -> "Hello";
     }
 
     /**
-     * Returns a {@link Predicate} of string that checks if string is empty
+     * Returns a {@link Predicate} of string that checks if string is empty   проверит что строка пуста
      *
      * @return a string predicate
      */
     public static Predicate<String> isEmptyPredicate() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return s -> s.isEmpty();
     }
 
     /**
      * Return a {@link Function} that accepts {@link String} and returns that string repeated n time, where n is passed
      * as function argument
-     *
+     *                                                         //function repeat
      * @return function that repeats Strings
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+       // throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return (s, integer) -> s.repeat(integer);
     }
 
     /**
@@ -41,7 +44,13 @@ public class CrazyLambdas {
      * @return function that converts adds dollar sign
      */
     public static Function<BigDecimal, String> toDollarStringFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return new Function<BigDecimal, String>() {
+            @Override
+            public String apply(BigDecimal bigDecimal) {
+                return "$" + bigDecimal.toString();
+            }
+        };
     }
 
     /**

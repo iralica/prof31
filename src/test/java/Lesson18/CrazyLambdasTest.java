@@ -1,201 +1,237 @@
 package Lesson18;
 
+import org.junit.Test;
+
 import java.math.BigDecimal;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.*;
 
+import static org.junit.Assert.*;
+
 public class CrazyLambdasTest {
+    @Test
+    public void testHelloSupplier() {
+        Supplier<String> helloSupplier = CrazyLambdas.helloSupplier();
 
-        /**
-         * Returns {@link Supplier} that always supply "Hello"
-         *
-         * @return a string supplier
-         */
-        public static Supplier<String> helloSupplier() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        assertEquals("Hello", helloSupplier.get());
+    }
 
-        /**
-         * Returns a {@link Predicate} of string that checks if string is empty
-         *
-         * @return a string predicate
-         */
-        public static Predicate<String> isEmptyPredicate() {
-            //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-            return new Predicate<String>() {
-                @Override
-                public boolean test(String s) {
-                    return s.isEmpty();
-                }
-            };
-        }
+    @Test
+    public void testIsEmptyPredicate() {
+        Predicate<String> isEmptyPredicate = CrazyLambdas.isEmptyPredicate();
 
-        /**
-         * Return a {@link Function} that accepts {@link String} and returns that string repeated n time, where n is passed
-         * as function argument
-         *
-         * @return function that repeats Strings
-         */
-        public static BiFunction<String, Integer, String> stringMultiplier() {
-            //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-            return new BiFunction<String, Integer, String>() {
-                @Override
-                public String apply(String s, Integer integer) {
-                    return null;
-                }
-            };
-        }
+        boolean nonEmptyStringResult = isEmptyPredicate.test("fasdfa");
+        boolean emptyStringResult = isEmptyPredicate.test("");
 
-        /**
-         * Returns a {@link Function} that converts a {@link BigDecimal} number into a {@link String} that start with
-         * a dollar sign and then gets a value
-         *
-         * @return function that converts adds dollar sign
-         */
-        public static Function<BigDecimal, String> toDollarStringFunction() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        assertFalse(nonEmptyStringResult);
+        assertTrue(emptyStringResult);
+    }
 
-        /**
-         * Receives two parameter that represent a range and returns a {@link Predicate<String>} that verifies if string
-         * length is in the specified range. E.g. min <= length < max
-         *
-         * @param min min length
-         * @param max max length
-         * @return a string predicate
-         */
-        public static Predicate<String> lengthInRangePredicate(int min, int max) {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+    @Test
+    public void testStringMultiplier() {
+        BiFunction<String, Integer, String> stringMultiplier = CrazyLambdas.stringMultiplier();
 
-        /**
-         * Returns a {@link Supplier} of random integers
-         *
-         * @return int supplier
-         */
-        public static IntSupplier randomIntSupplier() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        String threeTimesHi = stringMultiplier.apply("Hi", 3);
+        String twoTimesHello = stringMultiplier.apply("Hello", 2);
+
+        assertEquals("HiHiHi", threeTimesHi);
+        assertEquals("HelloHello", twoTimesHello);
+    }
 
 
-        /**
-         * Returns an {@link IntUnaryOperator} that receives an int as a bound parameter, and returns a random int
-         *
-         * @return int operation
-         */
-        public static IntUnaryOperator boundedRandomIntSupplier() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+    @Test
+    public void testToDollarStringFunction() {
+        Function<BigDecimal, String> toDollarStringFunction = CrazyLambdas.toDollarStringFunction();
+        String tenDollarStr = toDollarStringFunction.apply(BigDecimal.TEN.setScale(2));
 
-        /**
-         * Returns {@link IntUnaryOperator} that calculates an integer square
-         *
-         * @return square operation
-         */
-        public static IntUnaryOperator intSquareOperation() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        assertEquals("$10.00", tenDollarStr);
+    }
 
-        /**
-         * Returns a {@link LongBinaryOperator} sum operation.
-         *
-         * @return binary sum operation
-         */
-        public static LongBinaryOperator longSumOperation() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+    @Test
+    public void testLengthInRangePredicate() {
+        Predicate<String> lengthInRangePredicate = CrazyLambdas.lengthInRangePredicate(4, 10);
 
-        /**
-         * Returns a {@link ToIntFunction<String>} that converts string to integer.
-         *
-         * @return string to int converter
-         */
-        public static ToIntFunction<String> stringToIntConverter() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        boolean twoLetterStringResult = lengthInRangePredicate.test("Hi");
+        boolean fourLetterStringResult = lengthInRangePredicate.test("Hola");
+        boolean fiveLetterStringResult = lengthInRangePredicate.test("Amigo");
+        boolean eightLetterStringResult = lengthInRangePredicate.test("Lalaland");
+        boolean thirteenLetterStringResult = lengthInRangePredicate.test("Lambda rocks!");
 
-        /**
-         * Receives int parameter n, and returns a {@link Supplier} that supplies {@link IntUnaryOperator}
-         * that is a function f(x) = n * x
-         *
-         * @param n a multiplier
-         * @return a function supplier
-         */
-        public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        assertFalse(twoLetterStringResult);
+        assertTrue(fourLetterStringResult);
+        assertTrue(fiveLetterStringResult);
+        assertTrue(eightLetterStringResult);
+        assertFalse(thirteenLetterStringResult);
+    }
 
-        /**
-         * Returns a {@link UnaryOperator} that accepts str to str function and returns the same function composed with trim
-         *
-         * @return function that composes functions with trim() function
-         */
-        public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+    @Test
+    public void testRandomIntSupplier() {
+        IntSupplier randomIntSupplier = CrazyLambdas.randomIntSupplier();
 
-        /**
-         * Receives a {@link Runnable} parameter, and returns a {@link Supplier<Thread>}. The thread will be started only
-         * when you call supplier method {@link Supplier#get()}
-         *
-         * @param runnable the code you want to tun in new thread
-         * @return a thread supplier
-         */
-        public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        int firstValue = randomIntSupplier.getAsInt();
+        int secondValue = randomIntSupplier.getAsInt();
 
-        /**
-         * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in in a new thread.
-         *
-         * @return a runnable consumer
-         */
-        public static Consumer<Runnable> newThreadRunnableConsumer() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        assertNotEquals(firstValue, secondValue);
+    }
 
-        /**
-         * Returns a {@link Function} that accepts an instance of {@link Runnable} and returns a {@link Supplier} of a
-         * started {@link Thread} that is created from a given {@link Runnable}
-         *
-         * @return a function that transforms runnable into a thread supplier
-         */
-        public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+    @Test
+    public void testBoundedRandomIntSupplier() {
+        IntUnaryOperator boundedRandomIntSupplier = CrazyLambdas.boundedRandomIntSupplier();
 
-        /**
-         * Returns a {@link BiFunction} that has two parameters. First is {@link IntUnaryOperator} which is some integer function.
-         * Second is {@link IntPredicate} which is some integer condition. And the third is {@link IntUnaryOperator} which is
-         * a new composed function that uses provided predicate (second parameter of binary function) to verify its input
-         * parameter. If predicate returns {@code true} it applies a provided integer function
-         * (first parameter of binary function) and returns a result value, otherwise it returns an element itself.
-         *
-         * @return a binary function that receiver predicate and function and compose them to create a new function
-         */
-        public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        int randomIntLessThan10 = boundedRandomIntSupplier.applyAsInt(10);
+        int randomIntLessThan100 = boundedRandomIntSupplier.applyAsInt(100);
+        int randomIntLessThan1000 = boundedRandomIntSupplier.applyAsInt(1000);
+        int randomIntLessThan10000 = boundedRandomIntSupplier.applyAsInt(1000);
 
-        /**
-         * Returns a {@link BiFunction} which first parameter is a {@link Map} where key is a function name, and value is some
-         * {@link IntUnaryOperator}, and second parameter is a {@link String} which is a function name. If the map contains a
-         * function by a given name then it is returned by high order function otherwise an identity() is returned.
-         *
-         * @return a high-order function that fetches a function from a function map by a given name or returns identity()
-         */
-        public static BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+        assertTrue(randomIntLessThan10 < 10);
+        assertTrue(randomIntLessThan100 < 100);
+        assertTrue(randomIntLessThan1000 < 1000);
+        assertTrue(randomIntLessThan10000 < 10000);
+    }
 
-        /**
-         * Returns {@link Supplier} of {@link Supplier} of {@link Supplier} of {@link String} "WELL DONE".
-         *
-         * @return a supplier instance
-         */
-        public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
-            throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        }
+    @Test
+    public void testIntSquareOperation() {
+        IntUnaryOperator squareOperation = CrazyLambdas.intSquareOperation();
+
+        int squareOfFour = squareOperation.applyAsInt(4);
+        int squareOfZero = squareOperation.applyAsInt(0);
+
+        assertEquals(16, squareOfFour);
+        assertEquals(0, squareOfZero);
+    }
+
+    @Test
+    public void testLongSumOperation() {
+        LongBinaryOperator sumOperation = CrazyLambdas.longSumOperation();
+
+
+        long sumOfSevenAndEight = sumOperation.applyAsLong(7, 8);
+        long sumOfTenAndZero = sumOperation.applyAsLong(10, 0);
+        long sumOfFiveAndMinusTen = sumOperation.applyAsLong(5, -10);
+
+        assertEquals(15, sumOfSevenAndEight);
+        assertEquals(10, sumOfTenAndZero);
+        assertEquals(-5, sumOfFiveAndMinusTen);
+    }
+
+    @Test
+    public void testStringToIntConverter() {
+        ToIntFunction<String> stringToIntConverter = CrazyLambdas.stringToIntConverter();
+
+        int num = stringToIntConverter.applyAsInt("234");
+        int negativeNum = stringToIntConverter.applyAsInt("-122");
+
+        assertEquals(234, num);
+        assertEquals(-122, negativeNum);
+    }
+
+    @Test
+    public void testNMultiplyFunctionSupplier() {
+        Supplier<IntUnaryOperator> fiveMultiplyFunctionSupplier = CrazyLambdas.nMultiplyFunctionSupplier(5);
+
+        IntUnaryOperator multiplyByFiveOperation = fiveMultiplyFunctionSupplier.get();
+        int result = multiplyByFiveOperation.applyAsInt(11); // 11 * 5 = 55
+
+        assertEquals(55, result);
+    }
+
+    @Test
+    public void testComposeWithTrimFunction() {
+        UnaryOperator<Function<String, String>> composeWithTrimFunction = CrazyLambdas.composeWithTrimFunction();
+        Function<String, String> toLowerWithTrim = composeWithTrimFunction.apply(String::toLowerCase);
+        Function<String, String> threeTimesRepeatWithTrim = composeWithTrimFunction.apply(s -> s.repeat(3));
+
+        String hey = toLowerWithTrim.apply("  Hey ");
+        String threeTimesHi = threeTimesRepeatWithTrim.apply("  Hi  ");
+
+        assertEquals("hey", hey);
+        assertEquals("HiHiHi", threeTimesHi);
+    }
+
+    @Test
+    public void testRunningThreadSupplier() throws InterruptedException {
+        Queue<Integer> concurrentLinkedQueue = new ConcurrentLinkedQueue<>();
+        Supplier<Thread> runningThreadSupplier = CrazyLambdas.runningThreadSupplier(() -> concurrentLinkedQueue.add(25));
+
+        // supplier does not create and start a thread before you call get()
+        assertEquals(0, concurrentLinkedQueue.size());
+
+        Thread runningThread = runningThreadSupplier.get(); // new thread has been started
+        runningThread.join();
+
+        assertEquals(1, concurrentLinkedQueue.size());
+        assertEquals(25, concurrentLinkedQueue.element().intValue());
+    }
+
+    @Test
+    public void testNewThreadRunnableConsumer() throws InterruptedException {
+        Consumer<Runnable> newThreadRunnableConsumer = CrazyLambdas.newThreadRunnableConsumer();
+
+        Queue<Integer> concurrentLinkedQueue = new ConcurrentLinkedQueue<>();
+        newThreadRunnableConsumer.accept(() -> concurrentLinkedQueue.add(50));
+
+        Thread.sleep(500); // don't do that in real code
+
+        assertEquals(1, concurrentLinkedQueue.size());
+        assertEquals(50, concurrentLinkedQueue.element().intValue());
+    }
+
+    @Test
+    public void testRunnableToThreadSupplierFunction() throws InterruptedException {
+        Function<Runnable, Supplier<Thread>> runnableSupplierFunction = CrazyLambdas.runnableToThreadSupplierFunction();
+        Queue<Integer> concurrentLinkedQueue = new ConcurrentLinkedQueue<>();
+
+        Supplier<Thread> threadSupplier = runnableSupplierFunction.apply(() -> concurrentLinkedQueue.add(200));
+
+        assertEquals(0, concurrentLinkedQueue.size()); // supplier does not create and start a thread before you call get()
+
+        Thread thread = threadSupplier.get();// new thread has been started
+        thread.join();
+
+        assertEquals(1, concurrentLinkedQueue.size());
+        assertEquals(200, concurrentLinkedQueue.element().intValue());
+    }
+
+    @Test
+    public void testFunctionToConditionalFunction() {
+        BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> intFunctionToConditionalIntFunction
+                = CrazyLambdas.functionToConditionalFunction();
+
+        IntUnaryOperator abs = intFunctionToConditionalIntFunction.apply(a -> -a, a -> a < 0);
+
+        assertEquals(5, abs.applyAsInt(-5));
+        assertEquals(0, abs.applyAsInt(0));
+        assertEquals(5, abs.applyAsInt(5));
+    }
+
+    @Test
+    public void testFunctionLoader() {
+        BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader = CrazyLambdas.functionLoader();
+        Map<String, IntUnaryOperator> functionMap = new HashMap<>();
+        functionMap.put("increment", x -> x + 1);
+        functionMap.put("square", x -> x * x);
+
+        IntUnaryOperator incrementFunction = functionLoader.apply(functionMap, "increment");
+        IntUnaryOperator squareFunction = functionLoader.apply(functionMap, "square");
+        IntUnaryOperator identityFunction = functionLoader.apply(functionMap, "none");
+
+        assertEquals(5, incrementFunction.applyAsInt(4));
+        assertEquals(9, squareFunction.applyAsInt(3));
+        assertEquals(10, identityFunction.applyAsInt(10));
+    }
+
+
+    @Test
+    public void testTrickyWellDoneSupplier() {
+        Supplier<Supplier<Supplier<String>>> wellDoneSupplier = CrazyLambdas.trickyWellDoneSupplier();
+
+        String wellDoneStr = wellDoneSupplier.get().get().get();
+
+        assertEquals("WELL DONE!", wellDoneStr);
+    }
+
 
 }
