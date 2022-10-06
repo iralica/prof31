@@ -56,13 +56,22 @@ public class CrazyLambdas {
     /**
      * Receives two parameter that represent a range and returns a {@link Predicate<String>} that verifies if string
      * length is in the specified range. E.g. min <= length < max
-     *
+     *  Получает два параметра, представляющих диапазон, и возвращает
      * @param min min length
      * @param max max length
      * @return a string predicate
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                int value= s.length();
+                if (min<value || value>max) {
+                return true;}
+                return false;
+            }
+        };
     }
 
     /**
