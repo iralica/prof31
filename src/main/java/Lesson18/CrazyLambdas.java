@@ -45,12 +45,7 @@ public class CrazyLambdas {
      */
     public static Function<BigDecimal, String> toDollarStringFunction() {
         //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        return new Function<BigDecimal, String>() {
-            @Override
-            public String apply(BigDecimal bigDecimal) {
-                return "$" + bigDecimal.toString();
-            }
-        };
+        return bigDecimal -> "$" + bigDecimal.toString();
     }
 
     /**

@@ -3,6 +3,7 @@ package Lesson19;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class EmpTester {
@@ -18,15 +19,18 @@ public class EmpTester {
                 new Emp("Petr Sveshnikov", 37, "programmer"),
                 new Emp("Alex Con", 33, "analyst"),
                 new Emp("Olga Filimonova", 27, "programmer")
+
         );
 
 
         employees.stream()
                 .min(Comparator.comparing(Emp::getAge))
                 .ifPresent(System.out::println);
+
         employees.stream()
                 .map(emp -> emp.getName())
                 .forEach(System.out::println);
+
         employees.stream()
                 .filter(emp -> emp.getAge()>41)
                 .forEach(System.out::println);
@@ -38,19 +42,30 @@ public class EmpTester {
                 .forEach(System.out::println);
 
         // заджойнить имена всех работников старше 36 лет через ", "
+        employees.stream()
+                .filter(emp -> emp.getAge()>36)
+                        .map((Function<Emp, Object>) emp -> "," + emp.getName())
+                            .forEach(System.out::println);
 
         // посчитайте сумму возрастов работников
-        employees.stream().map(emp -> emp.getAge());
+        int summOfAge = employees.stream()
+                .mapToInt(emp-> emp.getAge()).sum();
+
+        System.out.println(summOfAge);
+
 
         // посчитайте количество программистов
+        long count = employees.stream()
+                .filter(emp -> emp.getPosition() > "programmer").collect(Collectors.counting());
 
         // посчитайте средний возраст
 
         // разделите на две группы - старше 40 лет и младше
         // найдите профессию самого "старого" из "молодых"
 
-        Map<Boolean, List<Emp>> oldYoung = employees.stream()
-                .collect(Collectors.partitioningBy(emp -> emp.getAge() > 40));
+       // Map<Boolean, List<Emp>> oldYoung = employees.stream()
+         //       .collect(Collectors.partitioningBy(emp -> emp.getAge() > 40));
+
 
         // сгруппируйте по профессии
         // Collectors.groupingBy(new Function<Object, Object>() {})
