@@ -56,9 +56,16 @@ public class EmpTester {
 
         // посчитайте количество программистов
         long count = employees.stream()
-                .filter(emp -> emp.getPosition() > "programmer").collect(Collectors.counting());
+                          .filter(emp -> "programmer".equals(emp.getPosition()) )
+                                .count();
+        System.out.println(count);
 
         // посчитайте средний возраст
+        double averageAge = employees.stream()
+                    .mapToInt(emp-> (emp.getAge()/2)).sum();
+
+        System.out.println(averageAge);
+
 
         // разделите на две группы - старше 40 лет и младше
         // найдите профессию самого "старого" из "молодых"

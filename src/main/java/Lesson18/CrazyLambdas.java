@@ -85,7 +85,9 @@ public class CrazyLambdas {
      * @return int operation
      */
     public static IntUnaryOperator boundedRandomIntSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+
+        return null;
     }
 
     /**
