@@ -2,6 +2,7 @@ package Lesson18;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.*;
 
 public class CrazyLambdas {
@@ -57,16 +58,7 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        return new Predicate<String>() {
-            @Override
-            public boolean test(String s) {
-                int value= s.length();
-                if (min<value || value>max) {
-                return true;}
-                return false;
-            }
-        };
+        return s ->s.length() >= min && s.length() <= max;
     }
 
     /**
@@ -75,7 +67,9 @@ public class CrazyLambdas {
      * @return int supplier
      */
     public static IntSupplier randomIntSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+     return () -> new Random().nextInt();
+
     }
 
 
@@ -87,7 +81,7 @@ public class CrazyLambdas {
     public static IntUnaryOperator boundedRandomIntSupplier() {
         // throw new UnsupportedOperationException("It's your job to implement this method"); // todo
 
-        return null;
+        return operand -> new Random().nextInt(operand);
     }
 
     /**
@@ -96,7 +90,8 @@ public class CrazyLambdas {
      * @return square operation
      */
     public static IntUnaryOperator intSquareOperation() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+       // throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return operand -> operand*operand;
     }
 
     /**
