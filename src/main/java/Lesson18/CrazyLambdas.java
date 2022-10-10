@@ -100,8 +100,9 @@ public class CrazyLambdas {
      * @return binary sum operation
      */
     public static LongBinaryOperator longSumOperation() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-    }
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return Long::sum;
+    };
 
     /**
      * Returns a {@link ToIntFunction<String>} that converts string to integer.
@@ -109,8 +110,9 @@ public class CrazyLambdas {
      * @return string to int converter
      */
     public static ToIntFunction<String> stringToIntConverter() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-    }
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return Integer::parseInt;
+    };
 
     /**
      * Receives int parameter n, and returns a {@link Supplier} that supplies {@link IntUnaryOperator}
@@ -120,8 +122,9 @@ public class CrazyLambdas {
      * @return a function supplier
      */
     public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-    }
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+            return () -> x -> n * x;
+    };
 
     /**
      * Returns a {@link UnaryOperator} that accepts str to str function and returns the same function composed with trim
@@ -129,7 +132,13 @@ public class CrazyLambdas {
      * @return function that composes functions with trim() function
      */
     public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return new UnaryOperator<Function<String, String>>() {
+            @Override
+            public Function<String, String> apply(Function<String, String> stringStringFunction) {
+                return null;
+            }
+        };
     }
 
     /**
