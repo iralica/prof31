@@ -24,7 +24,7 @@ public class CrazyLambdas {
      */
     public static Predicate<String> isEmptyPredicate() {
         //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        return s -> s.isEmpty();
+        return String::isEmpty;
     }
 
     /**
@@ -35,7 +35,7 @@ public class CrazyLambdas {
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
        // throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        return (s, integer) -> s.repeat(integer);
+        return String::repeat;
     }
 
     /**
@@ -69,7 +69,6 @@ public class CrazyLambdas {
     public static IntSupplier randomIntSupplier() {
         //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
      return () -> new Random().nextInt();
-
     }
 
 
@@ -186,7 +185,12 @@ public class CrazyLambdas {
      */
     public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
         //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-
+      return new BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator>() {
+          @Override
+          public IntUnaryOperator apply(IntUnaryOperator intUnaryOperator, IntPredicate intPredicate) {
+              return null;
+          }
+      };
     }
 
     /**
@@ -206,6 +210,22 @@ public class CrazyLambdas {
      * @return a supplier instance
      */
     public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return new Supplier<Supplier<Supplier<String>>>() {
+            @Override
+            public Supplier<Supplier<String>> get() {
+                return new Supplier<Supplier<String>>() {
+                    @Override
+                    public Supplier<String> get() {
+                        return new Supplier<String>() {
+                            @Override
+                            public String get() {
+                                return "WELL DONE!";
+                            }
+                        };
+                    }
+                };
+            }
+        };
     }
 }
