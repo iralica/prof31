@@ -152,12 +152,13 @@ public class CrazyLambdas {
     }
 
     /**
-     * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in in a new thread.
+     * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in a new thread.
      *
      * @return a runnable consumer
      */
     public static Consumer<Runnable> newThreadRunnableConsumer() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return Runnable::run;
     }
 
     /**
@@ -167,7 +168,11 @@ public class CrazyLambdas {
      * @return a function that transforms runnable into a thread supplier
      */
     public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return runnable -> (Supplier<Thread>) () -> {
+            runnable.run();
+            return new Thread(runnable);
+        };
     }
 
     /**
@@ -180,7 +185,8 @@ public class CrazyLambdas {
      * @return a binary function that receiver predicate and function and compose them to create a new function
      */
     public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+
     }
 
     /**
