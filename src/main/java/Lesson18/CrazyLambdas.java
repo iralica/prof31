@@ -133,12 +133,7 @@ public class CrazyLambdas {
      */
     public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
         //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
-        return new UnaryOperator<Function<String, String>>() {
-            @Override
-            public Function<String, String> apply(Function<String, String> stringStringFunction) {
-                return null;
-            }
-        };
+        return x -> s -> x.apply(s).replaceAll(" ", "");
     }
 
     /**
@@ -149,7 +144,11 @@ public class CrazyLambdas {
      * @return a thread supplier
      */
     public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        //throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return () -> {
+            runnable.run();
+            return new Thread(runnable);
+        };
     }
 
     /**
