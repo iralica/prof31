@@ -3,33 +3,47 @@ package Lesson21;
 //Напишите функцию которая получает на вход список строк и возвращает Map ключ которой это слово,
 // а значение это список номеров строк, в которых это слово встречалось (concordance)
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class HomeWork21 {
     public static void main(String[] args) {
-        List<String> count = new ArrayList<>();
-        count.add("В двух семьях, с равной знатностью и славой,");
-        count.add("В Вероне пышной разгорелся вновь");
-        count.add("Вражды минувш их дней раздор кровавый,");
-        count.add("Заставив литься с мирных граждан кровь.");
-        count.add("Из чресл враждебных, под звездой злосчастной,");
-        count.add( "По совершенье  их судьбы ужасной");
-        count.add( "Вражда отцов с их смертью умерла.");
+        List<String> count = List.of("В двух семьях, с равной знатностью и славой,",
+        "В Вероне пышной разгорелся вновь",
+        "Вражды минувш их дней раздор кровавый,",
+        "Заставив литься с мирных граждан кровь.",
+        "Из чресл враждебных, под звездой злосчастной,",
+        "По совершенье  их судьбы ужасной",
+        "Вражда отцов с их смертью умерла.");
 
-        System.out.println(countStrings(count));
+
     }
-    public static long countStrings(List<String> lines)
-    {
-        return
-                lines.stream()
-                        .map(s -> s.replaceAll("[—.,:-]", ""))
-                        .map(s -> s.replaceAll("\s+", " "))
-                        .map(String::toLowerCase)
-                        .flatMap(s -> Arrays.stream(s.split(" ")))
-                        .distinct()
-                        .count();
-    }
+  /*  public static Map<String, List<Integer>> getConcondance(List<String> lines)
+    {               Map<String, List<AbstractMap.SimpleEntry<String, Integer>>>
+            map =
+            IntStream.range(0, lines.size()) // int
+                    // boxed int -> Integer
+                    .mapToObj(i -> new AbstractMap.SimpleEntry<Integer, String>(i, lines.get(i))) // Pair<Integer, String>
+                    .flatMap(pair ->
+                            Arrays.stream(pair
+                                    .getValue() // каждая строка
+                                    .replaceAll("\\p{Punct}", "") // удаляем пунктуацию
+                                    .split("\\s+") // разбиваем по пробелу
+                            ).map(word -> new AbstractMap.SimpleEntry<String, Integer>(word, pair.getKey()))
+                    ) // Pair old -> 0
+                    .collect(Collectors.groupingBy(
+                            entry -> entry.getKey()
+                    ));
+        List<AbstractMap.SimpleEntry<String, Set<Integer>>> result =
+                mapWordToLineNumber.entrySet().stream()
+                        .map(pair -> new AbstractMap.SimpleEntry<String, Set<Integer>>(
+                                pair.getKey(),
+                                pair.getValue().stream().map(AbstractMap.SimpleEntry::getValue).collect(Collectors.toCollection(TreeSet::new)))
+                        ).collect(Collectors.toList());
+        System.out.println(result);
+
+
+        return null;
+    }*/
 }

@@ -18,7 +18,7 @@ public class StudentTester {
         //      Reducing - вычисление какого-то значения по всем элементам потока
         //      Collection - создание коллекции на базе потока
         List<Student> students = List.of(
-                new Student("Michael", "Svetlov", 24),
+                new Student("Michaeli", "Svetlov", 24),
                 new Student("Alexander", "Svetlov", 28),
                 new Student("Daria", "Petrovskaya", 19),
                 new Student("Maria", "Drobisheva", 19),

@@ -26,8 +26,8 @@ public class Student {
     @Override
     public String toString() {
         return "{" +
-                "FN='" + firstName + '\'' +
-                ", LN='" + lastName + '\'' +
+                "FN ='" + firstName + '\'' +
+                ", LN ='" + lastName + '\'' +
                 ", A=" + age +
                 '}';
     }
