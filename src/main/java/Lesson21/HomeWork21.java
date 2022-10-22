@@ -17,33 +17,53 @@ public class HomeWork21 {
         "По совершенье  их судьбы ужасной",
         "Вражда отцов с их смертью умерла.");
 
-
+        TreeMap<String, Set<Integer>> result = new TreeMap<>(getConcordance(count));
+        System.out.println(
+                result
+        );
     }
-  /*  public static Map<String, List<Integer>> getConcondance(List<String> lines)
-    {               Map<String, List<AbstractMap.SimpleEntry<String, Integer>>>
-            map =
-            IntStream.range(0, lines.size()) // int
-                    // boxed int -> Integer
-                    .mapToObj(i -> new AbstractMap.SimpleEntry<Integer, String>(i, lines.get(i))) // Pair<Integer, String>
-                    .flatMap(pair ->
-                            Arrays.stream(pair
-                                    .getValue() // каждая строка
-                                    .replaceAll("\\p{Punct}", "") // удаляем пунктуацию
-                                    .split("\\s+") // разбиваем по пробелу
-                            ).map(word -> new AbstractMap.SimpleEntry<String, Integer>(word, pair.getKey()))
-                    ) // Pair old -> 0
-                    .collect(Collectors.groupingBy(
-                            entry -> entry.getKey()
-                    ));
+    public static Map<String, Set<Integer>> getConcordance(List<String> lines) {
+        // вычистить строки от пунктуации
+        // как-то сделать пары из строки и номера строки
+        // номер строки -> строка
+        // слово -> номер строки
+//        SimpleEntry<String, Integer> pa = new SimpleEntry<>("hello", 33);
+//        pa.getValue() // 33
+//        pa.getKey() // hello
+
+        Map<String, List<AbstractMap.SimpleEntry<String, Integer>>>
+                mapWordToLineNumber =
+                IntStream.range(0, lines.size()) // int
+                        // boxed int -> Integer
+                        .mapToObj(i -> new AbstractMap.SimpleEntry<Integer, String>(i, lines.get(i))) // Pair<Integer, String>
+                        .flatMap(pair ->
+                                Arrays.stream(pair
+                                        .getValue() // каждая строка
+                                        .toLowerCase()
+                                        .replaceAll("\\p{Punct}", "") // удаляем пунктуацию
+                                        .split("\\s+") // разбиваем по пробелу
+                                ).map(word -> new AbstractMap.SimpleEntry<String, Integer>(word, pair.getKey()))
+                        ) // SimpleEntry<String, Integer>
+                        .collect(Collectors.groupingBy(
+                                AbstractMap.SimpleEntry::getKey
+                        )); // Map<String, List<SimpleEntry<String, Integer>>>
+
         List<AbstractMap.SimpleEntry<String, Set<Integer>>> result =
                 mapWordToLineNumber.entrySet().stream()
                         .map(pair -> new AbstractMap.SimpleEntry<String, Set<Integer>>(
                                 pair.getKey(),
                                 pair.getValue().stream().map(AbstractMap.SimpleEntry::getValue).collect(Collectors.toCollection(TreeSet::new)))
-                        ).collect(Collectors.toList());
-        System.out.println(result);
+                        )
+                        .sorted(Map.Entry.comparingByKey())
+                        .collect(Collectors.toList());
+        // System.out.println(result);
+
+        return result.stream().collect(Collectors.toMap(
+                AbstractMap.SimpleEntry::getKey,
+                AbstractMap.SimpleEntry::getValue
+        ));
 
 
-        return null;
-    }*/
+    }
+
 }
