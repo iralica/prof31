@@ -9,13 +9,11 @@ import java.util.stream.IntStream;
 
 public class HomeWork21 {
     public static void main(String[] args) {
-        List<String> count = List.of("В двух семьях, с равной знатностью и славой,",
-        "В Вероне пышной разгорелся вновь",
-        "Вражды минувш их дней раздор кровавый,",
-        "Заставив литься с мирных граждан кровь.",
-        "Из чресл враждебных, под звездой злосчастной,",
-        "По совершенье  их судьбы ужасной",
-        "Вражда отцов с их смертью умерла.");
+        List<String> count = List.of(
+                        "we were joy junkies riding coal waste on old mining roads.",
+                        "the white the divining subtle vibrations of earth.",
+                        "railroad tracks ribboning orange the sinking sun."
+        );
 
         TreeMap<String, Set<Integer>> result = new TreeMap<>(getConcordance(count));
         System.out.println(
