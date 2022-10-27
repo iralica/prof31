@@ -56,12 +56,12 @@ public class Lesson24 {
     // напишите функцию принимающую список автомобилей и возвращающую 
     // TreeMap<String, List<Car>> где ключ это производитель maker
     // а в списке авмомобили это производителя отсортированные по цене по убыванию
-    public static TreeMap<String, List<Car>> sortCars(List<Car> cars)
+    /* public static TreeMap<String, List<Car>> sortCars(List<Car> cars)
     {
         for (int i = 0; i < cars.size(); i++) {
 
         }
-    }
+    }*/
 
 }
 class Car {
