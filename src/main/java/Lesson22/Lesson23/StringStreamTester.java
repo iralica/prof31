@@ -1,4 +1,4 @@
-package Lesson23;
+package Lesson22.Lesson23;
 // https://www.oreilly.com/api/v2/epubs/9781449372477/files/httpatomoreillycomsourceoreillyimages1707640.png
 
 import java.io.BufferedReader;

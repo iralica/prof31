@@ -1,4 +1,4 @@
-package Lesson23;
+package Lesson22.Lesson23;
 
 public class Rate {
     public double amount;

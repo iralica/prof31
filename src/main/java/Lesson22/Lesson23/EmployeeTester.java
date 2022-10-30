@@ -1,4 +1,4 @@
-package Lesson23;
+package Lesson22.Lesson23;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -22,7 +22,7 @@ public class EmployeeTester {
             String name = t.nextToken();
             double salary = Double.parseDouble(t.nextToken());
             int age = Integer.parseInt(t.nextToken());
-            Lesson23.Employee e = new Employee(name, salary, age);
+            Employee e = new Employee(name, salary, age);
             System.out.println(e);
         } catch (IOException e) {
             System.err.println("Exception: " + e.getMessage());

@@ -17,6 +17,14 @@ public class Lesson24 {
         List<String> names = List.of("Max", "Masha", "Daria", "Alex", "Sam");
         System.out.println(getStringLengthFrequency(names)); // {3:2, 4:1, 5:2}
 
+        Car car1 = new Car("Mitsubishi", "Lancer", 35000);
+        Car car2 = new Car("Mitsubishi", "Lancer 1", 36000);
+        Car car3 = new Car("BMV", "X5", 55000);
+        Car car4 = new Car("BMV", "X6", 85000);
+        Car car5 = new Car("Nissan", "GTR", 55000);
+        Car car6 = new Car("BMV", "M", 80000);
+        List<Car> cars = List.of(car2, car1, car3, car4, car6, car5);
+        System.out.println(sortCars(cars));
 
     }
     // Напишите функцию, которая посчитает сумму последних N элементов из
@@ -56,12 +64,22 @@ public class Lesson24 {
     // напишите функцию принимающую список автомобилей и возвращающую 
     // TreeMap<String, List<Car>> где ключ это производитель maker
     // а в списке авмомобили это производителя отсортированные по цене по убыванию
-    /* public static TreeMap<String, List<Car>> sortCars(List<Car> cars)
+    public static TreeMap<String, List<Car>> sortCars(List<Car> cars)
     {
-        for (int i = 0; i < cars.size(); i++) {
-
+        TreeMap<String, List<Car>> res = new TreeMap<>();
+        for (Car car : cars) {
+            List<Car> c = res.containsKey(car.getMaker()) ? res.get(car.getMaker()) : new ArrayList<>();
+            c.add(car);
+            res.put(car.getMaker(), c);
         }
-    }*/
+        for (String maker : res.keySet()) {
+            List<Car> c = res.get(maker);
+            c.sort(Comparator.comparing(Car::getPrice).reversed());
+            res.put(maker, c);
+        }
+        return res;
+
+    }
 
 }
 class Car {
