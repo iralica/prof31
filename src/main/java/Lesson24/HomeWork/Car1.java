@@ -16,6 +16,9 @@ import java.util.stream.Collectors;
 import static java.lang.System.out;
 
 public class Car1 {
+    public Car1(String peugeot, String s, int i) {
+    }
+
     public static void main(String[] args) {
 
         Car car1 = new Car("Mitsubishi", "Lancer", 35000);
