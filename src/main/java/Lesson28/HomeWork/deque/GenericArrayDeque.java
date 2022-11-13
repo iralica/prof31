@@ -1,53 +1,48 @@
 package Lesson28.HomeWork.deque;
-/*
+
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class GenericArrayDeque <T> implements GenericDeque<T>{
 
-    private int[] source;              // массив с содержимым
+    private T[] source;           // массив с содержимым
     private int size = 0;              // размер контейнера
     private int firstElementIndex = 0; // чтобы быстрее удалить или добавить элемент в начало
 
     private static final int CAPACITY = 4;
 
-    public CustomArrayDeque() {
-        source = new int[CAPACITY];
+    public GenericArrayDeque() {
+        source = (T[]) new Object[CAPACITY];
     }
 
     @Override
     public String toString() {
-        StringBuilder  b = new StringBuilder();
+        StringBuilder b = new StringBuilder();
         b.append("[");
-        for(int i = 0; i < size; i++)
-        {
-            b.append(source[(firstElementIndex + i)% source.length]);
-            if(i < size - 1)
+        for (int i = 0; i < size; i++) {
+            b.append(source[(firstElementIndex + i) % source.length]);
+            if (i < size - 1)
                 b.append(", ");
         }
         b.append("]");
         return b.toString();
-//        return Arrays.toString(source);
     }
-
 
     @Override
     public void addFirst(T value) {
         if (size == source.length) {
-            // делаем новый массив в 2 раза больше и копируем элементы из старого в начало нового
             increaseCapacity();
         }
         firstElementIndex = (firstElementIndex - 1 + source.length) % source.length;
-//        if(firstElementIndex == 0)
-//            firstElementIndex = source.length - 1;
-//        else
-//            firstElementIndex = firstElementIndex - 1;
-
         source[firstElementIndex] = value;
         size++;
     }
 
+
+
     private void increaseCapacity() {
-        int[] newSource = new int[source.length * 2];
+        T[] newSource = (T[]) new Object[source.length * 2];
         int j = 0;  // индекс в новом массиве
         for (int i = firstElementIndex; i < source.length; i++) {
             newSource[j++] = source[i];
@@ -68,52 +63,63 @@ public class GenericArrayDeque <T> implements GenericDeque<T>{
     }
 
     @Override
-    public int removeFirst() {
-        // вернуть элемент по firstElementIndex и
-        // увеличить на единицу firstElementIndex
+    public int removeFirst() throws IndexOutOfBoundsException {
+        return 0;
+    }
+
+   /* @Override
+    public T removeFirst() {
+        if (size == 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        T element = source[firstElementIndex];
+        firstElementIndex = (firstElementIndex + 1) % source.length;
+        size--;
+        return element;
+    }*/
+
+
+    @Override
+    public void addLast(T value) {
+        if (size == source.length) {
+            increaseCapacity();
+        }
+        source[(firstElementIndex + size) % source.length] = value;
+        size++;
+    }
+
+    // My version addLast()
+    // @Override
+    public void addLastVer2(T value) {
+        if (size == source.length) {
+            increaseCapacity();
+        }
+        size++;
+        int lastElementIndex = (size + firstElementIndex - 1) % source.length;
+        source[lastElementIndex] = value;
+    }
+
+    @Override
+    public T getLast() {
+        if (size == 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        int lastElementIndex = (size + firstElementIndex - 1) % source.length;
+        return (T) source[lastElementIndex];
+    }
+
+   /* @Override
+    public T removeLast() {
+        // вернуть значение элемента по последнему индексу,
         // уменьшить на единицу size
         if (size == 0) {
             throw new IndexOutOfBoundsException();
         }
-        int element = source[firstElementIndex];
-        firstElementIndex = (firstElementIndex + 1) % source.length;
+        int lastElementIndex = (size + firstElementIndex - 1) % source.length;
+        T element = source[lastElementIndex];
         size--;
         return element;
-    }
-
-    @Override
-    public void addLast(int value) {
-        if (size == source.length) {
-            // делаем новый массив в 2 раза больше и копируем элементы из старого в начало нового
-            increaseCapacity();
-            // source[(firstElementIndex + size) % source.length];
-        }
-
-    }
-
-    @Override
-    public T getLast() throws IndexOutOfBoundsException {
-        return 0;
-    }
-
-    // @Override
-    //public int getLast() {
-    // if (size == 0) {
-    //  throw new IndexOutOfBoundsException();
-    //  return source[(size -1 + firstElementIndex)];
-    //}
-
-    // }
-
-    @Override
-    public int removeLast() {
-        if(size == 0)
-            throw new IndexOutOfBoundsException();
-        int r = source[(size - 1 + firstElementIndex) % source.length];
-        size--;
-        return r;
-    }
-
+    }*/
 
     @Override
     public int size() {
@@ -121,14 +127,69 @@ public class GenericArrayDeque <T> implements GenericDeque<T>{
     }
 
     @Override
-    public Iterator<Integer> descendingIterator() {
-        int[] newSource = new int[source.length * 2];
-        for (int i = size; i >=0 ; i--) {
-            newSource[i] = source[i];
-        }
-        source = newSource;
+    public Iterator<T> iteratorBackwards() {
+        return new Iterator<>() {
+            private int position = 0;
 
-        return null;
+            @Override
+            public boolean hasNext() {
+                return position++ < size();
+            }
+
+            @Override
+            public T next() {
+                return source[((size + firstElementIndex) % source.length) - position];
+            }
+        };
     }
 
-}*/
+    @Override
+    public Iterator<T> getBackwardIterator() {
+        return new Iterator<>() {
+            private int position = size;
+
+            @Override
+            public boolean hasNext() {
+                return --position >= 0;
+            }
+
+            @Override
+            public T next() {
+                if (position < 0 || position >= size) {
+                    throw new NoSuchElementException();
+                }
+                return source[(firstElementIndex + position) % source.length];
+            }
+        };
+    }
+
+    public BackwardIterator getBigToSmall() {
+        return new BackwardIterator();
+    }
+
+    private class BackwardIterator implements Iterator<T> {
+
+        private T[] data = (T[]) new Object[size];
+        private int position = size;
+
+        public BackwardIterator() {
+            for (int i = 0; i < size; i++) {
+                data[i] = source[(firstElementIndex + i) % source.length];
+            }
+            Arrays.sort(data);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return --position >= 0;
+        }
+
+        @Override
+        public T next() {
+            if (position < 0 || position >= size) {
+                throw new NoSuchElementException();
+            }
+            return data[position];
+        }
+    }
+}
