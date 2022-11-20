@@ -1,4 +1,4 @@
-package HomeWork5;
+package Lesson5.HomeWork5;
 
 import Lesson5.json.GeoCode;
 import Lesson5.json.GeoCoderService;

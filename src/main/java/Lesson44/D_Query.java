@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class D_Query {
     public static void main(String[] args) {
+
         String url = "jdbc:sqlite:shop.db";
         try (
                 // устновка соединения

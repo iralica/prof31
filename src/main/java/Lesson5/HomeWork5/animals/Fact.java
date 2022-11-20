@@ -1,4 +1,4 @@
-package HomeWork5.animals;
+package Lesson5.HomeWork5.animals;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

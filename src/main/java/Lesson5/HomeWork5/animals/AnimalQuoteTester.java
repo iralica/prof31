@@ -1,4 +1,4 @@
-package HomeWork5.animals;
+package Lesson5.HomeWork5.animals;
 // facts/random?animal_type=dog&amount=2
 // @Query ? и & добавляются автоматически
 

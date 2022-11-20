@@ -1,4 +1,4 @@
-package HomeWork5;
+package Lesson5.HomeWork5;
 
 import Lesson4.Lines.Point;
 import com.google.gson.Gson;

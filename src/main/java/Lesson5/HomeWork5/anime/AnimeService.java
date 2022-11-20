@@ -1,4 +1,4 @@
-package HomeWork5.anime;
+package Lesson5.HomeWork5.anime;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

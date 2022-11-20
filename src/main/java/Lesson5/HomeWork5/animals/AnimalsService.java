@@ -1,4 +1,4 @@
-package HomeWork5.animals;
+package Lesson5.HomeWork5.animals;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
