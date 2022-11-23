@@ -1,24 +1,50 @@
 package Lesson44.HomeWork;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class UpdateTable {
     public static void main(String[] args) {
-        String url = "jdbc:sqlite:shop.db";
+       // addSales(2001, "Cristo", "Warsaw", 12);
+       delete(2001);
+    }
+    public static void addSales(int snum, String sname, String city, int comm)
+    {
+        // insert into salespeople (snum, sname, citytext, comm) values (1021, 'smith', 'warsaw', 11);
+        String url = "jdbc:sqlite:shop.db"; // shop.db - название файла
         try (
-                // устновка соединения
                 Connection conn = DriverManager.getConnection(url);
-                Statement stmt = conn.createStatement();
-        ) {
-            stmt.execute("insert into 'customers' (cnum, cname, city, rating, snum) values (2009, 'Pate', 'Rate', 100, 1009) ;");
-            System.out.println("Data completed");
-
-        } catch (
-                SQLException e) {
-            System.err.println("SQLException " + e.getMessage());
+                PreparedStatement pstmt = conn.prepareStatement("insert into salespeople (snum, sname, city, comm) values (?, ?, ?, ?);");
+        )
+        {
+            pstmt.setInt(1, snum);
+            pstmt.setString(2, sname);
+            pstmt.setString(3, city);
+            pstmt.setInt(4, comm);
+            pstmt.execute();
+        }
+        catch (SQLException e)
+        {
+            System.err.println(e);
         }
     }
+
+    public static void delete(int snum)
+    {
+        // insert into salespeople (snum, sname, citytext, comm) values (1021, 'smith', 'warsaw', 11);
+        String url = "jdbc:sqlite:shop.db"; // shop.db - название файла
+        try (
+                Connection conn = DriverManager.getConnection(url);
+                PreparedStatement pstmt = conn.prepareStatement("delete from salespeople where snum = ?;");
+        )
+        {
+            pstmt.setInt(1, snum);
+            pstmt.execute();
+        }
+        catch (SQLException e)
+        {
+            System.err.println(e);
+        }
+    }
+
+
 }

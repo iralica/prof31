@@ -15,7 +15,8 @@
     <connection id="74b2704b-111f-4120-a794-8fda013f1b0d">
       <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from salespeople;
 select * from customers;
-select * from orders;]]></console>
+select * from orders;
+select * from currency;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
