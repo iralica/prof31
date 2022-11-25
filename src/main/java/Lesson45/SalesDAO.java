@@ -8,6 +8,7 @@ import java.util.List;
 public class SalesDAO {
 
     private static final String insert = "insert into salespeople values (?, ?, ?, ?);";
+    private static final String select = "select from salespeople where snum = ?;";
     private final PreparedStatement insertStatement;
     private final Statement selectStatement;
 
@@ -53,7 +54,26 @@ public class SalesDAO {
         }
         return result;
     }
-
+    public List<Sales> getSalesByID(int snum) throws SQLException {
+        Sales sales= null;
+        try (
+                ResultSet rs = selectStatement.executeQuery("select * from salespeople;");
+        )
+        {
+            while (rs.next())
+            {
+                result.add(
+                        new Sales(
+                                rs.getInt("snum"),
+                                rs.getString("sname"),
+                                rs.getString("city"),
+                                rs.getInt("comm")
+                        )
+                );
+            }
+        }
+        return result;
+    }
     public List<Sales> getAllInCity(String city)
     {
         return null;

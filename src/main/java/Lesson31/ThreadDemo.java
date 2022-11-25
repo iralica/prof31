@@ -11,25 +11,25 @@ public class ThreadDemo {
         Thread t1 = new Thread() {
             @Override
             public void run() {
-                // код в функции run выполняется в порожденном потоке
-                // порожденный поток работает пока не закончилась run
+                // пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ run пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ run
                 try {
-                    Thread.sleep(2_000); // милисекунды
+                    Thread.sleep(2_000); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 } catch (InterruptedException e) {  }
                 long threadId = Thread.currentThread().getId();
                 System.out.println("hello from thread " + threadId);
             }
         };
-        t1.setDaemon(true); // main не будет дожидаться окончания этого потока
+        t1.setDaemon(true); // main пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         t1.setPriority(Thread.MAX_PRIORITY);
-        t1.start(); // создает новый поток и запускает в нем метод run
+        t1.start(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ run
 
 
         long mainThreadId = Thread.currentThread().getId();
         System.out.println("hello from main " + mainThreadId);
 
-        // создайте и запустите 3 экземпляров MyThread
-        // тяжеловестная штукаб и занимает много памятиб поэтому быть аккуратными
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ MyThread
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         IntStream.range(0, 3).forEach(
                 i -> new MyThread().start()
         );
@@ -40,7 +40,7 @@ public class ThreadDemo {
        // new Thread(r1).start();
        // new Thread(r1).start();
 
-        // набор потоков + очередь из Runnable и Callable
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ + пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Runnable пїЅ Callable
         ExecutorService service = Executors.newFixedThreadPool(2);
 
         service.submit(r1);
@@ -55,20 +55,20 @@ public class ThreadDemo {
         service.submit(r1);
 
 
-// напишите свой класс расширяющий Runnable
-// внутри метода run
-// будет ждать рандомное время до 500 мс
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Runnable
+// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ run
+// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 500 пїЅпїЅ
 // new Random().nextInt(500)
-// пусть печатает текущее время и номер потока
+// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 // System.currentTimeMillis()
 
-// запустите 5 штук на ExecutorService
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 5 пїЅпїЅпїЅпїЅ пїЅпїЅ ExecutorService
 // RandomRunnable
 
         Runnable rr = new RandomRunnable();
 
         IntStream.range(0, 5).forEach(i -> service.submit(rr));
-        service.shutdown(); // останавливаем дождавшись выполнения всех задач в очереди
+        service.shutdown(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     } // end main
 }
 
@@ -112,4 +112,15 @@ class RandomRunnable implements Runnable{
         System.out.println("" + System.currentTimeMillis() + " " + Thread.currentThread().getId());
     }
 
+    class RunnableI implements Runnable{
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(new Random().nextInt(500));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

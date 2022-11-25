@@ -1,26 +1,26 @@
 package Lesson45;
 
 public class Customer {
-    public int cnum;
+    public Integer id;
     public String cname;
     public String city;
     public int rating;
-    public int snum;
+    public int sales;
 
-    public Customer(int cnum, String cname, String city, int rating, int snum) {
-        this.cnum = cnum;
+    public Customer(Integer id, String cname, String city, int rating, int sales) {
+        this.id = id;
         this.cname = cname;
         this.city = city;
         this.rating = rating;
-        this.snum = snum;
+        this.sales = sales;
     }
 
-    public int getCnum() {
-        return cnum;
+    public int getId() {
+        return id;
     }
 
-    public void setCnum(int cnum) {
-        this.cnum = cnum;
+    public void setId(int cnum) {
+        this.id = id;
     }
 
     public String getCname() {
@@ -47,11 +47,11 @@ public class Customer {
         this.rating = rating;
     }
 
-    public int getSnum() {
-        return snum;
+    public int getSales() {
+        return sales;
     }
 
-    public void setSnum(int snum) {
-        this.snum = snum;
+    public void setSales(int sales) {
+        this.sales = sales;
     }
 }
