@@ -5,17 +5,19 @@ import java.util.List;
 
 public class DAOTester {
     public static void main(String[] args) throws SQLException {
-        SalesDAO salesDao = new SalesDAO();
-        //Sales max = new Sales(4001, "Max", "Warsaw", 12);
-        //salesDao.save(max);
-        //Sales nik = new Sales(4002, "Nick", "London", 15);
-        //salesDao.save(nik);
-        /*List<Sales> allSales = salesDao.getAll();
+        SalesDAO salesDAO = new SalesDAO();
+//        Sales max = new Sales(4001, "Max", "Warsaw", 12);
+//        salesDao.save(max);
+        List<Sales> allSales = salesDAO.getAll();
         allSales.stream().forEach(
                 sales -> System.out.println(sales.getName())
-        );*/
+        );
+
+        System.out.println("------");
         CustomerDao customerDao = new CustomerDao();
-        Customer gucci = new Customer(2010, "Gucci", "Neapol", 300, 1010);
-        customerDao.save(gucci);
+        List<Customer> allInSanJose = customerDao.getAllInCity("San Jose");
+        System.out.println(allInSanJose.size());
+        allInSanJose.stream().forEach(customer -> System.out.println(customer.getCname() + "|" + customer.getSales().getName()));
     }
+
 }
