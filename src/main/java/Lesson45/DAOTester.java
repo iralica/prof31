@@ -15,9 +15,9 @@ public class DAOTester {
 
         System.out.println("------");
         CustomerDao customerDao = new CustomerDao();
-        List<Customer> allInSanJose = customerDao.getAllInCity("San Jose");
+        List<Customer> allInSanJose = customerDao.getAllByCity("San Jose");
         System.out.println(allInSanJose.size());
-        allInSanJose.stream().forEach(customer -> System.out.println(customer.getCname() + "|" + customer.getSales().getName()));
+        allInSanJose.stream().forEach(customer -> System.out.println(customer.getName() + "|" + customer.getSales().getName()));
     }
 
 }
